@@ -1,0 +1,19 @@
+<div class="selectClient">
+  <div class="dropdown">
+    <div class="dropdown-btn">
+      <button type="button" class="">
+        <span class="btn-label">Community Sift</span>
+        <span class="btn-icon btn-icon-left">
+          <fa-icon [icon]="faServer"></fa-icon>
+        </span>
+      </button>
+      <div class="dropdown-menu">
+        <ul class="dropdown-menu-list" name="client"
+
+        (change)="onClientChanged()">
+          <li *ngFor="let client of clients">{{ client.name }} </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

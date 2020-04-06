@@ -1,0 +1,13 @@
+<div class="breadcrumb">
+  <div class="breadcrumb__icon">
+    <a routerLink="/">
+      <img src="/assets/logo.svg" alt="home">
+    </a>
+  </div>
+  <i class="fas fa-chevron-right home-arrow"></i>
+  <xng-breadcrumb [separator]="iconTemplate"></xng-breadcrumb>
+  <i class="far fa-copy" aria-hidden="true"></i>
+  <ng-template #iconTemplate>
+      <i class="fas fa-chevron-right"></i>
+  </ng-template>
+</div>

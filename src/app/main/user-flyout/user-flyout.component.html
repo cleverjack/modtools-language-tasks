@@ -1,0 +1,7 @@
+<button *ngIf="currentUser" type="button">
+  <span class="btn-icon">
+    <fa-icon [icon]="faUser"></fa-icon>
+  </span>
+</button>
+
+<button *ngIf="!currentUser"><i class="mdi mdi-account-off"></i></button>

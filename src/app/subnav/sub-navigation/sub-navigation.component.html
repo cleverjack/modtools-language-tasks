@@ -1,0 +1,53 @@
+<nav class='subnav'>
+  <ul class="top-level-nav">
+    <li>
+      <a routerLink="/">
+        <fa-icon [icon]="faHome"></fa-icon>
+        <ng-container i18n>Dashboard</ng-container>
+        <i class="material-icons">expand_more</i>
+      </a>
+    </li>
+    <li>
+      <a>
+        <fa-icon [icon]="faBook"></fa-icon>
+        <ng-container i18n>Policy Guides</ng-container>
+        <i class="material-icons">expand_more</i>
+      </a>
+    </li>
+    <li>
+      <a>
+        <fa-icon [icon]="faFilter"></fa-icon>
+        <ng-container i18n>Filter Quality</ng-container>
+        <i class="material-icons">expand_more</i>
+      </a>
+    </li>
+    <li>
+      <a>
+        <fa-icon [icon]="faUserCheck"></fa-icon>
+        <ng-container i18n>User Reputation</ng-container>
+        <i class="material-icons">expand_more</i>
+      </a>
+    </li>
+    <li>
+      <a>
+        <fa-icon [icon]="faFlag"></fa-icon>
+        <ng-container i18n>Reported Content</ng-container>
+        <i class="material-icons">expand_more</i>
+      </a>
+    </li>
+    <li>
+      <a>
+        <fa-icon [icon]="faChartLine"></fa-icon>
+        <ng-container i18n>Transparency Reports</ng-container>
+        <i class="material-icons">expand_more</i>
+      </a>
+    </li>
+  </ul>
+
+  <subnav-help></subnav-help>
+
+  <api-button></api-button>
+
+  <admin-button></admin-button>
+
+</nav>

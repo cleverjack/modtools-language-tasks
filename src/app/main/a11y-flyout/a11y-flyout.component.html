@@ -1,0 +1,50 @@
+<div class="dropdown">
+  <div class="dropdown-btn">
+    <button type="button" i18n>
+      <span class="btn-label">Accessibility</span>
+      <span class="btn-icon btn-icon-left">
+        <fa-icon [icon]="faUniversalAccess"></fa-icon>
+      </span>
+    </button>
+    <div class="dropdown-menu dropdown-menu-accessibility">
+      <div class="textResize">
+        <h6>Text Resize</h6>
+        <p class="small">
+          Use the buttons below to increase or deacrease the text size.
+        </p>
+        <div class="resizebtn">
+          <span class="resizeIcon icon1">
+            <i class="mdi mdi-format-font-size-increase" aria-hidden="true"></i>
+          </span>
+          <span class="resizeIcon icon2">
+            <i class="mdi mdi-format-font" aria-hidden="true"></i>
+          </span>
+          <span class="resizeIcon icon3"><i class="mdi mdi-format-font-size-decrease" aria-hidden="true"></i></span>
+        </div>
+      </div>
+      <div class="contrastSwitch">
+        <h6>Contrast Switch</h6>
+        <p class="small">
+          Use the toggle below to switch the contrast.
+        </p>
+        <div class="themeSwitcher">
+          <label class="radio">
+            <input type="radio" name="themingRadio" value="lightMode" (change)="themeActivate($event.target.value)">
+            <span class="checkmark"></span>
+            <span for="theming">Light Mode</span>
+          </label>
+          <label class="radio">
+            <input type="radio" name="themingRadio" value="darkMode" checked="checked" (change)="themeActivate($event.target.value)">
+            <span class="checkmark"></span>
+            <span for="theming">Dark Mode</span>
+          </label>
+          <label class="radio">
+            <input type="radio" name="themingRadio" value="contrastMode" >
+            <span class="checkmark"></span>
+            <span for="theming">High contrast Mode</span>
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

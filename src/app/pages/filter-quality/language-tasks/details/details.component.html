@@ -1,0 +1,57 @@
+<div id="language-task-details"> 
+    <app-language-tasks-details-header></app-language-tasks-details-header>
+    <div class="language-task-details">
+        <div> 
+            <div class="section"> 
+                <p class="section-name">Name</p>
+                <span class="text">{{name}}</span>
+            </div>
+            <div class="section"> 
+                <p class="section-name">Instructions</p>
+                <span class="text">{{instruction}}</span>
+            </div>
+            <div class="section actions" id="language-task-actions"> 
+                <div class="item due-date"> 
+                    <p class="action-name">Due Date</p>
+                    <app-date-picker id="picker"
+                        #dateComponent
+                        [config]="config"
+                    >
+                    </app-date-picker>
+                </div>
+                <div class="item languages"> 
+                    <p class="action-name">Languages</p>
+                    <app-app-language-button-group (languageChange)="onLanguageChange($event)"></app-app-language-button-group>
+                </div>
+                <div class="item assign-to"> 
+                    <p class="action-name">Assign To</p>
+                    <app-select></app-select>
+                </div>
+                <div class="item accounts"> 
+                    <p class="action-name">Accounts</p>
+                    <app-select></app-select>
+                </div>
+            </div>
+            <div class="section"> 
+                <p class="section-name">Comments</p>
+                <div class="comment-wrapper"> 
+                    <app-comment></app-comment>
+                </div>
+            </div>
+        </div>
+        <div class="buttons-wrapper"> 
+            <button class="button no-border accent">
+                <span class="btn-label">Save</span>
+            </button>
+            <button class="button no-border light">
+                <span class="btn-label">Start</span>
+            </button>
+            <button class="button no-border light">
+                <span class="btn-label">Stop</span>
+            </button>
+            <button class="button no-border dark">
+                <span class="btn-label">Cancel</span>
+            </button>
+        </div>
+    </div>
+</div>

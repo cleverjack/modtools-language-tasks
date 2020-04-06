@@ -1,0 +1,3 @@
+<div class="language-button-group"> 
+    <span [ngClass]="{'active': i === currentIndex}" *ngFor="let item of languages; let i = index" (click)="selectLanguage(i, item)">{{item}}</span>
+</div>

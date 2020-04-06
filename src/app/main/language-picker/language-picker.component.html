@@ -1,0 +1,19 @@
+<div class="selectLanguage">
+  <div class="dropdown">
+    <div class="dropdown-btn">
+      <button type="button" class="">
+        <span class="btn-label">English</span>
+        <span class="btn-icon btn-icon-left">
+          <fa-icon [icon]="faLanguage"></fa-icon>
+        </span>
+      </button>
+      <div class="dropdown-menu">
+        <ul class="dropdown-menu-list" name="client"
+
+        (change)="onLanguageChanged()">
+          <li *ngFor="let language of languages">{{ language.name }} </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

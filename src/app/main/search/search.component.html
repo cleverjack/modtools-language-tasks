@@ -1,0 +1,33 @@
+<div class="top-search" ng-blur="hideSearch()">
+  <div class="top-search-icon">
+    <fa-icon [icon]="faSearch"></fa-icon>
+  </div>
+  <input type="search" placeholder="Search for keywords, phrases, etc." (click)="closeSearch = 0" [(ngModel)]="searchText" (keyup)="onKeyUp($event)">
+</div>
+<div class="top-search-advance" *ngIf="closeSearch ==0">
+  <div class="top-search-close">
+    <button type="button" class="" (click)="closeSearch = 1">
+      <span class="btn-icon"><fa-icon [icon]="faTimes"></fa-icon></span>
+    </button>
+  </div>
+  <div class="top-search-btn">
+    <div class="dropdown">
+      <div class="dropdown-btn">
+        <button type="button" class="">
+          <span class="btn-label">Submit</span>
+          <span class="btn-icon btn-icon-left">
+            <fa-icon [icon]="faEllipsisH"></fa-icon>
+          </span>
+        </button>
+        <div class="dropdown-menu dropdown-menu-search">
+          <ul class="dropdown-menu-list">
+            <li>Text </li>
+            <li>Username</li>
+            <li>UserID</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

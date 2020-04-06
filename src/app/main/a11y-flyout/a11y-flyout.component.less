@@ -1,0 +1,54 @@
+:host {
+  display: contents;
+}
+
+:host-context(header) {
+  button {
+    margin-left: var(--button-spacing);
+  }
+}
+
+.dropdown-menu-accessibility{
+  padding: 15px;
+  right: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 30px;
+  grid-template-areas: "resize contrast";
+  width: 450px;
+}
+
+.textResize{
+  grid-area: "resize";
+}
+
+.textResize p,
+.contrastSwitch p{
+  font-size: 10px;
+  color: var(--dark-green-text);
+  margin-bottom: 5px;;
+}
+
+.contrastSwitch{
+  grid-area: "contrast";
+}
+
+.icon1{
+  font-size: 2.5em;
+}
+
+.icon2{
+  font-size: 1.5em;
+}
+
+.icon3{
+  font-size: 1em;
+}
+
+.resizeIcon:not(:last-child){
+  margin-right: 35px;
+}
+
+.themeSwitcher{
+  margin-top: 15px;
+}

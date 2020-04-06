@@ -1,0 +1,92 @@
+:host {
+  margin-left: 2em;
+  margin-right: 2em;
+  flex: 1;
+  position: relative;
+
+  &:before{
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 5px;
+    height  : 30px;
+    width   : 1px;
+    border-left:1px solid #24292B;
+  }
+}
+
+/* TODO: Figure out responsive sizing */
+input[type='search'] {
+  width: 100%;
+  position: relative;
+  color: var(--input-text-color);
+  border: 0;
+  background: 0 0;
+  outline: 0!important;
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+  padding: 0;
+  border-radius: 0;
+  display: block;
+  height: 38px;
+  font-size: 0.9em;
+  font-weight: 400;
+  line-height: 1.5;
+  padding-left: 54px;
+  color: var(--text-color-lv1);
+
+  &::placeholder {
+    color: var(--grey-text);
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &::-webkit-search-cancel-button{
+    display: none;
+  }
+}
+
+.top-search-icon{
+  background-color: transparent;
+  position: absolute;
+  top: 10px;
+  left: 25px;
+  color: var(--grey-text);
+  font-size: 13px;
+}
+
+.top-search{
+  display: inline-block;
+  min-width: 400px;
+}
+
+.top-search-advance, .top-search-close, .top-search-btn{
+  display: inline-block;
+}
+
+.top-search:hover > .top-search-icon{
+  color: var(--text-color-lv1);
+}
+
+.dropdown-menu-search{
+  min-width: 127px;
+}
+
+.top-search-close button{
+  background-color: var(--page-bg);
+  margin: 0 15px;
+  border-color: var(--close-btn-border);
+}
+
+.top-search-close .btn-icon{
+  padding: 0 14px;
+  color: var(--close-btn-txt);
+}
+
