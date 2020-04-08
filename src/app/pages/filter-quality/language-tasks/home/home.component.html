@@ -21,13 +21,13 @@
             <div class="th actions">Actions</div>
         </div>
         <div class="table-body"> 
-            <div class="tr" *ngFor="let task of tasks | paginate: { itemsPerPage: 1, currentPage: p, totalItems: totalPages }"> 
+            <div class="tr" *ngFor="let task of tasks | paginate: { itemsPerPage: 15, currentPage: p, totalItems: totalPages }"> 
                 <div class="td checkbox">
                     <app-checkbox type="accent"></app-checkbox>
                 </div>
                 <div class="td id">{{task.queueItem.contentId}}</div>
                 <div class="td task">{{task.data.task}}</div>
-                <div class="td assign-to">{{task.queueItem.checkout.moderatorId}}</div>
+                <div class="td assign-to">{{task.queueItem.checkout && task.queueItem.checkout.moderatorId ? task.queueItem.checkout.moderatorId : 'Not Assigned'}}</div>
                 <div class="td unresolved-comments">
                     <div class="comment-icon" (click)="openCommentsPanel(task)">
                         <i class="fas fa-comment-dots"></i>
