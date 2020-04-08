@@ -20,6 +20,7 @@ import { AppDatePickerModule } from './app-datepicker';
 import { AppPaginationModule } from './app-pagination/pagination.module';
 import { AppLanguageButtonGroupComponent } from './app-language-button-group/app-language-button-group.component';
 import { AppCommentComponent } from './app-comment/app-comment.component';
+import { CommentsPanelComponent } from './comments-panel/comments-panel.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { AppCommentComponent } from './app-comment/app-comment.component';
     AppCheckboxComponent,
     TopicInfoComponent,
     AppLanguageButtonGroupComponent,
-    AppCommentComponent
+    AppCommentComponent,
+    CommentsPanelComponent
   ],
   imports: [
     CommonModule,
@@ -58,7 +60,11 @@ import { AppCommentComponent } from './app-comment/app-comment.component';
     AppCheckboxComponent,
     TopicInfoComponent,
     AppLanguageButtonGroupComponent,
-    AppCommentComponent
+    AppCommentComponent,
+    BreadcrumbModule,
+    AppDatePickerModule,
+    AppPaginationModule,
+    CommentsPanelComponent
   ]
 })
 export class SharedComponentsModule { }

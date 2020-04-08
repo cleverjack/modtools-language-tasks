@@ -15,6 +15,8 @@ export class HomeComponent implements OnInit {
 
   p: number;
   totalPages: number;
+  isCommentsPanel: boolean;
+
   // tasks: Observable<Array<TaskOutputItems>>;
   tasks: Array<TaskOutputItems>;
   perPageCounts: Array<number> = [15, 50, 100, 500, 1000];
@@ -45,5 +47,13 @@ export class HomeComponent implements OnInit {
 
   onPageCountChange (count): void {
     console.log(count);
+  }
+
+  openCommentsPanel (comment): void {
+    this.isCommentsPanel = true;
+  }
+
+  closeCommentsPanel (): void {
+    this.isCommentsPanel = false;
   }
 }

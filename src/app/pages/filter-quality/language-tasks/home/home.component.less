@@ -53,6 +53,7 @@
             width: 170px;
             flex: 0 0 170px;
             padding-right: 10px;
+            overflow: inherit;
         }
         .due {
             width: 126px;
@@ -95,6 +96,31 @@
         }
     }
     
+    .comment-icon {
+        width: 28px;
+        height: 28px;
+        border-radius: 4px;
+        font-size: 16px;
+        line-height: 28px;
+        color: var(--icon-color);
+        background-color: var(--page-bg);
+        position: relative;
+        text-align: center;
+        
+        span {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            text-align: center;
+            font: Bold 11px/15px var(--font-family-sans-serif);
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background-color: var(--accent);
+            color: var(--text-dark-color);
+        }
+    }
+
     .pagination-wrapper {
         display: flex;
         margin-top: 1rem;

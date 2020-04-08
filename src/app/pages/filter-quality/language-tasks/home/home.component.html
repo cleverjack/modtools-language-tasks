@@ -25,13 +25,18 @@
                 <div class="td checkbox">
                     <app-checkbox type="accent"></app-checkbox>
                 </div>
-                <div class="td id">ID</div>
+                <div class="td id">{{task.queueItem.contentId}}</div>
                 <div class="td task">{{task.data.task}}</div>
-                <div class="td assign-to">Assign To</div>
-                <div class="td unresolved-comments">Unresolved Comments</div>
-                <div class="td due">{{task.data.dueDate}}</div>
+                <div class="td assign-to">{{task.queueItem.checkout.moderatorId}}</div>
+                <div class="td unresolved-comments">
+                    <div class="comment-icon" (click)="openCommentsPanel(task)">
+                        <i class="fas fa-comment-dots"></i>
+                        <span>{{task.queueItem.comments.unresolved}}</span>
+                    </div>
+                </div>
+                <div class="td due">{{task.data.dueDate | dueDate}}</div>
                 <div class="td actions">
-                    <div class="action-view button no-border" [routerLink]="['/filter-quality/language-tasks', 'hello']"> 
+                    <div class="action-view button no-border" [routerLink]="['/filter-quality/language-tasks', task.queueItem.contentId]"> 
                         <i class="fas fa-eye"></i>
                         <span>View</span>
                     </div>
@@ -49,3 +54,4 @@
         </div>
     </div>
 </div>
+<app-comments-panel (doCancel)="closeCommentsPanel()" *ngIf="isCommentsPanel"></app-comments-panel>

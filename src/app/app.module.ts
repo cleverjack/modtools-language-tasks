@@ -33,7 +33,7 @@ export const metaReducers: MetaReducer<any>[] = [debug];
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,

@@ -2,6 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { IDatePickerConfig, ECalendarValue } from 'src/app/shared-components/app-datepicker';
 import * as moment from 'moment';
+import * as LanguageTasksSeletor from '../../../../store/reducers/language-tasks.reducers';
+import * as LanguageTasksActions from '../../../../store/actions/language-tasks.actions';
+import { Store, select } from '@ngrx/store';
+import { TaskOutput, TaskOutputItems } from 'src/app/api';
+import { ActivatedRoute, ParamMap } from '@angular/router';
+import { switchMap } from 'rxjs/operators';
 
 const DEF_CONF: IDatePickerConfig = {
   firstDayOfWeek: 'su',
@@ -57,12 +63,40 @@ export class DetailsComponent implements OnInit {
     ...DEF_CONF,
     format: 'DD-MM-YYYY'
   };
+  task: TaskOutputItems;
+  dueDate: moment.Moment;
   
-  constructor() { }
+  constructor(
+    private readonly store: Store,
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit(): void {
-    this.name  = 'SR7,Split {{sex_body_part}} to {{sex_body_part}} and {{ineundo_body_part}}';
-    this.instruction = 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet';
+    let taskId = this.route.snapshot.paramMap.get('id');
+    
+    let params: LanguageTasksActions.LanguageTasksRequestInterface = {
+      language: 'en',
+      clientIds: [12],
+      contentIds: [taskId]
+    };
+
+    this.store.dispatch(LanguageTasksActions.requestLanguageTaskDetails({params: params}));
+    this.store.pipe(select(LanguageTasksSeletor._getLanguageTaskDetails))
+    // .pipe(
+    //   tap(res => {
+    //       this.totalPages = res ? res.total : 0;
+    //       this.p = 1;
+    //   }),
+    //   map(res => res ? res.items : [])
+    // );
+    .subscribe((languageTasks: TaskOutput) => {
+      console.log('--------------tasks---------------', languageTasks);
+      let tasks = languageTasks ? languageTasks.items : [];
+      if (tasks.length > 0) {
+        this.task = tasks[0];
+        this.dueDate = moment(this.task.data.dueDate);
+      }
+    });
   }
 
   onLanguageChange(lang): void {

@@ -9,8 +9,9 @@ import { LanguageTasksHomeHeaderComponent } from './home/header/header.component
 import { LanguageTasksDetailsHeaderComponent } from './details/header/header.component';
 import { AppDatePickerModule } from 'src/app/shared-components/app-datepicker';
 import { AppPaginationModule } from 'src/app/shared-components/app-pagination/pagination.module';
-
-
+import { PipesModule } from 'src/app/pipes/pipes.module';
+import { DueDatePipe } from 'src/app/pipes/due-date.pipe';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -22,9 +23,9 @@ import { AppPaginationModule } from 'src/app/shared-components/app-pagination/pa
   ],
   imports: [
     CommonModule,
+    FormsModule,
     SharedComponentsModule,
-    AppDatePickerModule,
-    AppPaginationModule,
+    PipesModule,
     LanguageTasksRoutingModule
   ]
 })

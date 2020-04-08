@@ -4,11 +4,11 @@
         <div> 
             <div class="section"> 
                 <p class="section-name">Name</p>
-                <span class="text">{{name}}</span>
+                <span class="text">{{task && task.data.task}}</span>
             </div>
             <div class="section"> 
                 <p class="section-name">Instructions</p>
-                <span class="text">{{instruction}}</span>
+                <span class="text">{{task && task.data.instructions}}</span>
             </div>
             <div class="section actions" id="language-task-actions"> 
                 <div class="item due-date"> 
@@ -16,6 +16,7 @@
                     <app-date-picker id="picker"
                         #dateComponent
                         [config]="config"
+                        [(ngModel)]="dueDate"
                     >
                     </app-date-picker>
                 </div>

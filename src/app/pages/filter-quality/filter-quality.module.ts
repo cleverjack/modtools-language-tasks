@@ -12,8 +12,6 @@ import { DirectiveModule } from 'src/app/directives/directives.module';
   imports: [
     CommonModule,
     FilterQualityRoutingModule,
-    SharedComponentsModule,
-    BreadcrumbModule,
     DirectiveModule
   ]
 })

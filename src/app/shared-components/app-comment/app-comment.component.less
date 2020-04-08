@@ -43,9 +43,61 @@
     
     .comment {
         margin-left: 72px;
+        font: Bold 16px/24px var(--font-family-monospace);
+        // height: 70px;
+        // overflow: hidden;
+        // margin-bottom: 35px;
 
         .text {
             color: var(--text-inactive-color);
+        }
+    }
+
+    &.small-size {
+        padding-top: 1rem;
+        padding-bottom: 2rem;
+        border-bottom: 1px solid var(--comment-separator-color);
+
+        .comment-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+    
+            .avatar {
+                width: 36px;
+                height: 36px;
+                font-size: 14px;
+                margin-right: 16px;
+            }
+    
+            .name {
+                font: Bold 18px/38px var(--font-family-monospace);
+                color: var(--text-color);
+                flex: 1;
+            }
+    
+            .actions {
+                display: flex;
+            }
+            
+            .action {
+                width: 38px;
+                height: 38px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 16px;
+                color: var(--icon-color);
+                background-color: var(--action-button-bg);
+                border-radius: var(--action-button-radius);
+                margin-left: 20px;
+            }
+        }
+        
+        .comment {
+            margin-left: 0px;
+            height: 70px;
+            overflow: hidden;
         }
     }
 }

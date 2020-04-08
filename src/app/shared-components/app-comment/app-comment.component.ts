@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, Input } from '@angular/core';
 
 @Component({
   selector: 'app-comment',
@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./app-comment.component.less']
 })
 export class AppCommentComponent implements OnInit {
+  @Input() isSmall: boolean = false;
+  @Input() comment: any;
   instruction: string;
 
   constructor() { }
