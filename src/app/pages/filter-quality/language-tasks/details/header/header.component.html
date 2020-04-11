@@ -10,7 +10,10 @@
           <i class="fas fa-filter"></i>
         </span>
       </button>
-      <button class="button active">
+      <button class="button mr-20" (click)="editTask()" *ngIf="pageType === 0">
+        <span class="btn-label">Edit Task</span>
+      </button>
+      <button class="button active" (click)="createTask()" *ngIf="pageType === 0 || pageType === 1">
         <span class="btn-label">New Task</span>
       </button>
   </div>

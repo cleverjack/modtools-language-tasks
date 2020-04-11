@@ -13,13 +13,29 @@ const routes: Routes = [{
       component: HomeComponent,
     },
     {
+      path: 'create',
+      component: DetailsComponent,
+      data: {
+        breadcrumb: 'Create',
+        title: 'Language Tasks Create'
+      }
+    },
+    {
       path: ':id',
       component: DetailsComponent,
       data: {
         breadcrumb: 'Details',
         title: 'Language Tasks Details'
       }
-    }
+    },
+    // {
+    //   path: ':id/edit',
+    //   component: DetailsComponent,
+    //   data: {
+    //     breadcrumb: 'Details',
+    //     title: 'Language Tasks Details'
+    //   }
+    // },
   ]
 }];
 

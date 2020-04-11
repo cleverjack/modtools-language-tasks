@@ -36,6 +36,30 @@ export class LanguageTasksEffects {
     )
   );
 
+  createLanguageTask$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(LanguageTasksActions.requestLanguageTaskCreate),
+      exhaustMap(action =>
+        this.apiService.addTaskItems(action.params.body, action.params.updateData, action.params.extraHttpRequestParams).pipe(
+          map(response => LanguageTasksActions.successLanguageTaskCreate({ resp: response })),
+          catchError(error => of(LanguageTasksActions.failedLanguageTaskCreate({ resp: error })))
+        )
+      )
+    )
+  );
+
+  // editLanguageTask$ = createEffect(() =>
+    // this.actions$.pipe(
+    //   ofType(LanguageTasksActions.requestLanguageTaskEdit),
+    //   exhaustMap(action =>
+    //     this.apiService.editTaskItems(action.params.body, action.params.updateData, action.params.extraHttpRequestParams).pipe(
+    //       map(response => LanguageTasksActions.successLanguageTaskEdit({ resp: response })),
+    //       catchError(error => of(LanguageTasksActions.failedLanguageTaskEdit({ resp: error })))
+    //     )
+    //   )
+    // )
+  // );
+
   constructor(
     private actions$: Actions,
     private apiService: DefaultService

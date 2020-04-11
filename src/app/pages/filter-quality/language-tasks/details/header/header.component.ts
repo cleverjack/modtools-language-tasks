@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { has } from 'lodash';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { filter, map, mergeMap } from 'rxjs/operators';
@@ -11,6 +11,8 @@ import { FilterService, FilterType } from 'src/app/services/filter.service';
   styleUrls: ['./header.component.less']
 })
 export class LanguageTasksDetailsHeaderComponent implements OnInit {
+  @Input() pageType: number;
+  @Output() taskActionEvent = new EventEmitter<number>();
 
   constructor(
     private router: Router,
@@ -21,5 +23,15 @@ export class LanguageTasksDetailsHeaderComponent implements OnInit {
 
   ngOnInit() {
     
+  }
+
+  editTask(): void {
+    this.pageType = 1;
+    this.taskActionEvent.emit(this.pageType);
+  }
+
+  createTask(): void {
+    this.pageType = 2;
+    this.taskActionEvent.emit(this.pageType);
   }
 }

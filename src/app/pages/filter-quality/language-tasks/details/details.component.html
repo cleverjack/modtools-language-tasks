@@ -1,36 +1,56 @@
 <div id="language-task-details"> 
-    <app-language-tasks-details-header></app-language-tasks-details-header>
+    <app-language-tasks-details-header [pageType]="pageType" (taskActionEvent)="changeTaskAction($event)"></app-language-tasks-details-header>
     <div class="language-task-details">
-        <div> 
-            <div class="section"> 
+        <div>
+            <div class="section" [ngClass]="{'half-mb': pageType !== 0}"> 
                 <p class="section-name">Name</p>
-                <span class="text">{{task && task.data.task}}</span>
+                <span class="text" *ngIf="pageType === 0">{{task && task.data.task}}</span>
+                <input [(ngModel)]="taskFormData.data.task" class="input-field input" *ngIf="pageType !== 0"/>
             </div>
-            <div class="section"> 
+            <div class="section half-mb"> 
                 <p class="section-name">Instructions</p>
-                <span class="text">{{task && task.data.instructions}}</span>
+                <span class="text lh-30" *ngIf="pageType === 0">{{task && task.data.instructions}}</span>
+                <textarea [(ngModel)]="taskFormData.data.instructions" class="input-field textarea" *ngIf="pageType !== 0"></textarea>
             </div>
-            <div class="section actions" id="language-task-actions"> 
+            <div class="section actions details-info" *ngIf="pageType === 0"> 
+                <div class="item due-date"> 
+                    <p class="action-name">Due Date</p>
+                    <span class="text">{{dueDate | date : 'MM-dd-y'}}</span>
+                </div>
+                <div class="item languages"> 
+                    <p class="action-name">Languages</p>
+                    <span class="text">All</span>
+                </div>
+                <div class="item assign-to"> 
+                    <p class="action-name">Assign To</p>
+                    <span class="text">Not Assigned</span>
+                </div>
+                <div class="item accounts"> 
+                    <p class="action-name">Accounts</p>
+                    <span class="text">Admin Only</span>
+                </div>
+            </div>
+            <div class="section half-mb actions edit-info" *ngIf="pageType !== 0"> 
                 <div class="item due-date"> 
                     <p class="action-name">Due Date</p>
                     <app-date-picker id="picker"
                         #dateComponent
                         [config]="config"
-                        [(ngModel)]="dueDate"
+                        [(ngModel)]="taskFormData.data.dueDate"
                     >
                     </app-date-picker>
                 </div>
                 <div class="item languages"> 
                     <p class="action-name">Languages</p>
-                    <app-app-language-button-group (languageChange)="onLanguageChange($event)"></app-app-language-button-group>
+                    <app-app-language-button-group (languageChange)="onLanguageChange($event)" [(ngModel)]="taskFormData.language"></app-app-language-button-group>
                 </div>
                 <div class="item assign-to"> 
                     <p class="action-name">Assign To</p>
-                    <app-select></app-select>
+                    <app-select [items]="assignOptions" (doSelect)="changeAssign($event)" [(ngModel)]="taskFormData.data.assign"></app-select>
                 </div>
                 <div class="item accounts"> 
                     <p class="action-name">Accounts</p>
-                    <app-select></app-select>
+                    <app-select [items]="accountOptions" (doSelect)="changeAccount($event)" [(ngModel)]="taskFormData.data.account"></app-select>
                 </div>
             </div>
             <div class="section"> 
@@ -41,7 +61,7 @@
             </div>
         </div>
         <div class="buttons-wrapper"> 
-            <button class="button no-border accent">
+            <button class="button no-border accent" *ngIf="pageType !== 0" (click)="onSave()">
                 <span class="btn-label">Save</span>
             </button>
             <button class="button no-border light">
@@ -50,7 +70,7 @@
             <button class="button no-border light">
                 <span class="btn-label">Stop</span>
             </button>
-            <button class="button no-border dark">
+            <button class="button no-border dark" [routerLink]="['/filter-quality/language-tasks']">
                 <span class="btn-label">Cancel</span>
             </button>
         </div>
