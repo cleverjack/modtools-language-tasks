@@ -160,16 +160,17 @@ export class DetailsComponent implements OnInit {
         };
         break;
       case 2:
-        this.taskFormData = {
-          clientId: null,
-          language: 'en',
-          priority: 0,
-          data: {
-            task: '',
-            instructions: '',
-            dueDate: moment()
-          }
-        };
+        this.router.navigate(['/filter-quality/language-tasks/create']);
+        // this.taskFormData = {
+        //   clientId: null,
+        //   language: 'en',
+        //   priority: 0,
+        //   data: {
+        //     task: '',
+        //     instructions: '',
+        //     dueDate: moment()
+        //   }
+        // };
         break;
       default: 
         break;

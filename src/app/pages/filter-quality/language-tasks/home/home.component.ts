@@ -20,6 +20,7 @@ export class HomeComponent implements OnInit {
   // tasks: Observable<Array<TaskOutputItems>>;
   tasks: Array<TaskOutputItems>;
   perPageCounts: Array<number> = [15, 50, 100, 500, 1000];
+  countPerPage: number = 15;
   
   constructor(private readonly store: Store) { }
 
@@ -39,14 +40,13 @@ export class HomeComponent implements OnInit {
     //   map(res => res ? res.items : [])
     // );
     .subscribe((languageTasks: TaskOutput) => {
-      console.log('--------------tasks---------------', languageTasks);
       this.totalPages = languageTasks ? languageTasks.total : 0;
       this.tasks = languageTasks ? languageTasks.items : [];
     });
   }
 
   onPageCountChange (count): void {
-    console.log(count);
+    this.countPerPage = count;
   }
 
   openCommentsPanel (comment): void {

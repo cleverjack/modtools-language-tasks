@@ -21,7 +21,7 @@
             <div class="th actions">Actions</div>
         </div>
         <div class="table-body"> 
-            <div class="tr" *ngFor="let task of tasks | paginate: { itemsPerPage: 15, currentPage: p, totalItems: totalPages }"> 
+            <div class="tr" *ngFor="let task of tasks | paginate: { itemsPerPage: countPerPage, currentPage: p, totalItems: totalPages }"> 
                 <div class="td checkbox">
                     <app-checkbox type="accent"></app-checkbox>
                 </div>
@@ -49,7 +49,7 @@
                 >
             </app-pagination-controls>
             <div class="pagination-page-count-wrapper"> 
-                <app-pagination-counts (pageCountChange)="onPageCountChange($event)" [countArray]="perPageCounts" [currentIndex]="1"></app-pagination-counts>
+                <app-pagination-counts (pageCountChange)="onPageCountChange($event)" [countArray]="perPageCounts"></app-pagination-counts>
             </div>
         </div>
     </div>
