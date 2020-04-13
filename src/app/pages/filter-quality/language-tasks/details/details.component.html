@@ -19,11 +19,11 @@
                 </div>
                 <div class="item languages"> 
                     <p class="action-name">Languages</p>
-                    <span class="text">All</span>
+                    <span class="text">{{task && task.queueItem.language && task.queueItem.language.language ? task.queueItem.language.language : 'All'}}</span>
                 </div>
                 <div class="item assign-to"> 
                     <p class="action-name">Assign To</p>
-                    <span class="text">Not Assigned</span>
+                    <span class="text">{{task && task.queueItem.checkout && task.queueItem.checkout.moderatorId ? task.queueItem.checkout.moderatorId : 'Not Assigned'}}</span>
                 </div>
                 <div class="item accounts"> 
                     <p class="action-name">Accounts</p>
