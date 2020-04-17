@@ -6,7 +6,7 @@
                 <div class="header">
                     <div class="title-wrapper"> 
                         <span class="title">Comments</span>
-                        <span class="comment-count-badge">3</span>
+                        <span class="comment-count-badge">{{comments.length}}</span>
                     </div>
                     
                     <span class="close-button" (click)="cancelPanel()">✖ CLOSE</span>
@@ -19,20 +19,18 @@
                     <span class="phrase">
                         You are a really <span class="text-orange">not very nice</span> person
                     </span>
-                    <div class="comments-wrapper"> 
-                        <app-comment [isSmall]="true"></app-comment>
-                        <app-comment [isSmall]="true"></app-comment>
-                        <app-comment [isSmall]="true"></app-comment>
+                    <div class="comments-wrapper" *ngFor="let comment of comments"> 
+                        <app-comment [isSmall]="true" [comment]="comment" [queueId]="queueId" [contentId]="contentId"></app-comment>
                     </div>
                 </div>
                 <div class="add-comment-wrapper">
                     <p class="leave-comment">Leave a comment</p>
-                    <textarea placeholder="Type your Comment"></textarea>
+                    <textarea placeholder="Type your Comment" [(ngModel)]="commentText"></textarea>
                 </div>
             </div>
             <div class="buttons-wrapper"> 
                 <div class="left"> 
-                    <button class="bg-green black mr-10" (click)="applyFilter($event)">Submit</button>
+                    <button class="bg-green black mr-10" (click)="submit($event)">Submit</button>
                     <button class="bg-black" (click)="cancelPanel()">Cancel</button>
                 </div>
                 <div class="right"> 

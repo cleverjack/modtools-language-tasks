@@ -13,10 +13,10 @@ import { FilterService, FilterType } from 'src/app/services/filter.service';
 export class LanguageTasksHomeHeaderComponent implements OnInit {
 
   constructor(
-    private router: Router,
-    private activatedRoute: ActivatedRoute,
-    private constantsService: ConstantsService,
-    private filterService: FilterService
+    // private router: Router,
+    // private activatedRoute: ActivatedRoute,
+    // private constantsService: ConstantsService,
+    // private filterService: FilterService
   ) { }
 
   ngOnInit() {

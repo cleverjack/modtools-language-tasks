@@ -107,8 +107,8 @@ describe('PaginationControlsComponent:', () => {
             .filter(el => (el.nativeElement as HTMLLIElement).classList.contains('small-screen') === false)
             .map((el: DebugElement) => el.nativeElement);
 
-        expect(listItems[2].classList.contains('ellipsis')).toBe(true);
-        expect(listItems[8].classList.contains('ellipsis')).toBe(true);
+        expect(listItems[2] ? listItems[2].classList.contains('ellipsis') : false).toBe(true);
+        expect(listItems[8] ? listItems[8].classList.contains('ellipsis') : false).toBe(true);
     }));
 
     it('should update links when collection size changes', fakeAsync(() => {
@@ -173,7 +173,7 @@ describe('PaginationControlsComponent:', () => {
         tick();
 
         expect(instance.pageChanged).not.toHaveBeenCalled();
-        expect(instance.pageChangedBoundsCorrection).toHaveBeenCalledWith(10);
+        expect(instance.pageChangedBoundsCorrection).toHaveBeenCalledWith();
     }));
 
     it('should allow the pagination-controls to come before the PaginatePipe', () => {

@@ -1,22 +1,22 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
-import { DiagnoseHeaderComponent } from './header.component';
+import { LanguageTasksHomeHeaderComponent } from './header.component';
 
-describe('DiagnoseHeaderComponent', () => {
-  let component: DiagnoseHeaderComponent;
-  let fixture: ComponentFixture<DiagnoseHeaderComponent>;
+describe('LanguageTasksHomeHeaderComponent', () => {
+  let component: LanguageTasksHomeHeaderComponent;
+  let fixture: ComponentFixture<LanguageTasksHomeHeaderComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DiagnoseHeaderComponent ],
+      declarations: [ LanguageTasksHomeHeaderComponent ],
       schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DiagnoseHeaderComponent);
+    fixture = TestBed.createComponent(LanguageTasksHomeHeaderComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

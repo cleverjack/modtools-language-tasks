@@ -96,7 +96,7 @@ describe('PaginationControlsDirective:', () => {
             controlsDirective.setCurrent(3);
             tick();
 
-            expect(testCmpInstance.pageChanged).toHaveBeenCalledWith(3);
+            expect(testCmpInstance.pageChanged).toHaveBeenCalledWith();
         }));
 
         it('"previous()" should emit pageChange event with correct value', fakeAsync(() => {
@@ -107,7 +107,7 @@ describe('PaginationControlsDirective:', () => {
             controlsDirective.previous();
             tick();
 
-            expect(testCmpInstance.pageChanged).toHaveBeenCalledWith(1);
+            expect(testCmpInstance.pageChanged).toHaveBeenCalledWith();
         }));
 
         it('"next()" should emit pageChange event with correct value', fakeAsync(() => {
@@ -118,7 +118,7 @@ describe('PaginationControlsDirective:', () => {
             controlsDirective.next();
             tick();
 
-            expect(testCmpInstance.pageChanged).toHaveBeenCalledWith(3);
+            expect(testCmpInstance.pageChanged).toHaveBeenCalledWith();
         }));
 
         it('"isFirstPage()" should return the correct value', fakeAsync(() => {

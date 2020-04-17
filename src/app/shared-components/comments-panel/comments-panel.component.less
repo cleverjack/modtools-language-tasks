@@ -19,11 +19,14 @@
             position: relative;
             overflow-y: auto;
             height: 100%;
+            display: flex;
+            flex-direction: column;
         }
 
         .scrollable-content {
             padding: 20px;
             background-color: #1b1f20;
+            flex: 1;
             // padding-bottom: 95px;
         }
 
@@ -95,6 +98,7 @@
                 padding: 15px;
                 border: none;
                 resize: none;
+                color: var(--text-white-color);
             }
         }
         .buttons-wrapper {

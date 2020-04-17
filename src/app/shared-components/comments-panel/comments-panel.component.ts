@@ -1,4 +1,5 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { TaskOutput, TaskOutputItems, TaskInput, DefaultService, Comment, CommentInput } from 'src/app/api';
 
 @Component({
   selector: 'app-comments-panel',
@@ -7,18 +8,34 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 })
 export class CommentsPanelComponent implements OnInit {
   @Output() doCancel = new EventEmitter<boolean>();
-  
-  constructor() { }
+  @Input() queueId: string;
+  @Input() contentId: string;
+
+  public comments: Array<Comment> = [];
+  public commentText: string;
+
+  constructor(private apiService: DefaultService) { }
 
   ngOnInit(): void {
+    this.apiService.getComments(this.queueId, this.contentId).subscribe(resp => {
+      if (resp) {
+        this.comments = resp;
+      }
+    });
   }
 
   cancelPanel() {
     this.doCancel.emit(true);
   }
 
-  applyFilter(data) {
-    // this.doApply.emit(data);
-  }
+  submit(ev) {
+    let body: CommentInput = {};
+    body.text = this.commentText;
 
+    this.apiService.addComment(this.queueId, this.contentId, body).subscribe(resp => {
+      if (resp) {
+        this.comments.push(resp);
+      }
+    });
+  }
 }

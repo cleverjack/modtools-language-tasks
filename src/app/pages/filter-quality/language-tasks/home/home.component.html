@@ -54,4 +54,4 @@
         </div>
     </div>
 </div>
-<app-comments-panel (doCancel)="closeCommentsPanel()" *ngIf="isCommentsPanel"></app-comments-panel>
+<app-comments-panel (doCancel)="closeCommentsPanel()" *ngIf="isCommentsPanel" [queueId]="commentQueueId" [contentId]="commentContentId"></app-comments-panel>

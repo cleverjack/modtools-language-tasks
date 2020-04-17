@@ -5,18 +5,27 @@
         </span>
         <span class="name">Jhon Smith</span>
         <div class="actions"> 
-            <span class="action">
+            <span class="action" (click)="onEdit()" *ngIf="!isEdit">
                 <i class="fas fa-pen"></i>
             </span>
-            <span class="action">
+            <span class="action" (click)="onSave()" *ngIf="isEdit">
+                <i class="fas fa-save"></i>
+            </span>
+            <span class="action" (click)="onDelete()" *ngIf="!isEdit">
                 <i class="fas fa-trash-alt"></i>
             </span>
-            <span class="action">
+            <span class="action" (click)="onCancel()" *ngIf="isEdit">
+                <i class="fas fa-times"></i>
+            </span>
+            <span class="action" (click)="onResolve()">
                 <i class="fas fa-check"></i>
             </span>
         </div>
     </div>
-    <div class="comment"> 
+    <div class="comment" *ngIf="!isEdit"> 
         <span class="text">{{instruction}}</span>
+    </div>
+    <div class="comment edit-textarea" *ngIf="isEdit"> 
+        <textarea class="edit-text" [(ngModel)]="instruction"></textarea>
     </div>
 </div>

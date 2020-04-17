@@ -188,6 +188,13 @@ export interface DefaultServiceInterface {
     deleteUsernameItems(clientId?: number, languages?: Array<string>, extraHttpRequestParams?: any): Observable<{}>;
 
     /**
+    * Get a comments
+    * @param queueId The unique identifier for this queue
+    * @param contentId The unique identifier for the content
+    */
+   getComments(queueId: string, contentId: string, extraHttpRequestParams?: any): Observable<Array<Comment>>;
+
+    /**
     * Get a comment
     * Get a comment by Id for this item
     * @param queueId The unique identifier for this queue

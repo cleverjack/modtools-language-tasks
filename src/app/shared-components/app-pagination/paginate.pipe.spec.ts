@@ -55,7 +55,10 @@ describe('PaginatePipe:', () => {
             currentPage: 1
         };
 
-        expect(paginationService.getInstance()).toEqual({});
+        expect(paginationService.getInstance()).toEqual({
+            itemsPerPage: 10,
+            currentPage: 1
+        });
         pipe.transform(collection, config);
         expect(paginationService.getInstance()).toBeDefined();
     });

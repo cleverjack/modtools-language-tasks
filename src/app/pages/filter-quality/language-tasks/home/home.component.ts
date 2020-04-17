@@ -16,6 +16,8 @@ export class HomeComponent implements OnInit {
   p: number;
   totalPages: number;
   isCommentsPanel: boolean;
+  commentQueueId: string;
+  commentContentId: string;
 
   // tasks: Observable<Array<TaskOutputItems>>;
   tasks: Array<TaskOutputItems>;
@@ -49,7 +51,9 @@ export class HomeComponent implements OnInit {
     this.countPerPage = count;
   }
 
-  openCommentsPanel (comment): void {
+  openCommentsPanel (task): void {
+    this.commentQueueId = 'task';
+    this.commentContentId = task.queueItem.contentId;
     this.isCommentsPanel = true;
   }
 

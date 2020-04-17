@@ -945,6 +945,51 @@ export class DefaultService implements DefaultServiceInterface {
     }
 
     /**
+     * Get a comments
+     * @param queueId The unique identifier for this queue
+     * @param contentId The unique identifier for the content
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getComments(queueId: string, contentId: string, observe?: 'body', reportProgress?: boolean): Observable<Array<Comment>>;
+    public getComments(queueId: string, contentId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<Comment>>>;
+    public getComments(queueId: string, contentId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<Comment>>>;
+    public getComments(queueId: string, contentId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (queueId === null || queueId === undefined) {
+            throw new Error('Required parameter queueId was null or undefined when calling getComment.');
+        }
+
+        if (contentId === null || contentId === undefined) {
+            throw new Error('Required parameter contentId was null or undefined when calling getComment.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.request<Comment>('get',`${this.basePath}/inbox/queue/${encodeURIComponent(String(queueId))}/items/${encodeURIComponent(String(contentId))}/comments`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
      * Get a comment
      * Get a comment by Id for this item
      * @param queueId The unique identifier for this queue
