@@ -95,7 +95,7 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
   @Output() onLeftNav: EventEmitter<INavEvent> = new EventEmitter();
   @Output() onRightNav: EventEmitter<INavEvent> = new EventEmitter();
   CalendarMode = ECalendarMode;
-  isInited: boolean = false;
+  isInited = false;
   componentConfig: IDayCalendarConfigInternal;
   weeks: IDay[][];
   weekdays: Moment[];
@@ -104,7 +104,7 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
   validateFn: DateValidator;
   currentCalendarMode: ECalendarMode = ECalendarMode.Day;
   monthCalendarConfig: IMonthCalendarConfig;
-  _shouldShowCurrent: boolean = true;
+  _shouldShowCurrent = true;
   navLabel: string;
   showLeftNav: boolean;
   showRightNav: boolean;

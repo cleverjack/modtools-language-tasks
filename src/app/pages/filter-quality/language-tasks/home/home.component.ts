@@ -25,8 +25,8 @@ export class HomeComponent implements OnInit {
   tasks: Array<TaskOutputItems>;
   perPageCounts: Array<number> = [15, 50, 100, 500, 1000];
   countPerPage: number = this.perPageCounts[0];
-  currentPage: number = 1;
-  selectedTab: string = 'all';
+  currentPage = 1;
+  selectedTab = 'all';
 
   constructor(
     private readonly store: Store,
@@ -34,12 +34,12 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    let params: LanguageTasksActions.LanguageTasksRequestInterface = {
+    const params: LanguageTasksActions.LanguageTasksRequestInterface = {
       language: 'en',
       clientIds: [12]
     };
 
-    this.store.dispatch(LanguageTasksActions.requestLanguageTasks({params: params}));
+    this.store.dispatch(LanguageTasksActions.requestLanguageTasks({params}));
     this.store.pipe(select(LanguageTasksSeletor._getLanguageTasks))
     // .pipe(
     //   tap(res => {
@@ -55,7 +55,7 @@ export class HomeComponent implements OnInit {
   }
 
   getTaskItems (initial: boolean = false): void {
-    let params: LanguageTasksActions.LanguageTasksRequestInterface = {
+    const params: LanguageTasksActions.LanguageTasksRequestInterface = {
       language: 'en',
       clientIds: [12],
       limit: this.countPerPage,
@@ -80,7 +80,7 @@ export class HomeComponent implements OnInit {
         break;
     }
 
-    this.store.dispatch(LanguageTasksActions.requestLanguageTasks({params: params}));
+    this.store.dispatch(LanguageTasksActions.requestLanguageTasks({params}));
   }
 
   selectTab (id): void {

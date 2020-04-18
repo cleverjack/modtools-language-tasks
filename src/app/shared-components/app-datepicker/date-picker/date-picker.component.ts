@@ -15,7 +15,7 @@ import {ITimeSelectConfig} from '../time-select/time-select-config.model';
 import {TimeSelectComponent} from '../time-select/time-select.component';
 import {TimeSelectService} from '../time-select/time-select.service';
 import {IDatePickerConfig, IDatePickerConfigInternal} from './date-picker-config.model';
-import {IDpDayPickerApi} from './date-picker.api';
+import {IAppDayPickerApi} from './date-picker.api';
 import {DatePickerService} from './date-picker.service';
 import {
   AfterViewInit,
@@ -120,8 +120,8 @@ export class DatePickerComponent implements OnChanges,
 
   set selected(selected: Moment[]) {
     this._selected = selected;
-    this.inputElementValue = (<string[]>this.utilsService
-      .convertFromMomentArray(this.componentConfig.format, selected, ECalendarValue.StringArr))
+    this.inputElementValue = (this.utilsService
+      .convertFromMomentArray(this.componentConfig.format, selected, ECalendarValue.StringArr) as string[])
       .join(' | ');
     const val = this.processOnChangeCallback(selected);
     this.onChangeCallback(val, false);
@@ -148,11 +148,11 @@ export class DatePickerComponent implements OnChanges,
     }
   }
 
-  isInitialized: boolean = false;
+  isInitialized = false;
   @Input() config: IDatePickerConfig;
   @Input() mode: CalendarMode = 'day';
-  @Input() placeholder: string = '';
-  @Input() disabled: boolean = false;
+  @Input() placeholder = '';
+  @Input() disabled = false;
   @Input() displayDate: SingleCalendarValue;
   @HostBinding('class') @Input() theme: string;
   @Input() minDate: SingleCalendarValue;
@@ -175,25 +175,25 @@ export class DatePickerComponent implements OnChanges,
   dayCalendarConfig: IDayCalendarConfig;
   dayTimeCalendarConfig: IDayTimeCalendarConfig;
   timeSelectConfig: ITimeSelectConfig;
-  hideStateHelper: boolean = false;
+  hideStateHelper = false;
   inputValue: CalendarValue;
-  isFocusedTrigger: boolean = false;
+  isFocusedTrigger = false;
   inputElementValue: string;
   calendarWrapper: HTMLElement;
   appendToElement: HTMLElement;
   inputElementContainer: HTMLElement;
   popupElem: HTMLElement;
-  handleInnerElementClickUnlisteners: Function[] = [];
-  globalListenersUnlisteners: Function[] = [];
+  handleInnerElementClickUnlisteners: (() => void)[] = [];
+  globalListenersUnlisteners: (() => void)[] = [];
   validateFn: DateValidator;
-  api: IDpDayPickerApi = {
+  api: IAppDayPickerApi = {
     open: this.showCalendars.bind(this),
     close: this.hideCalendar.bind(this),
     moveCalendarTo: this.moveCalendarTo.bind(this)
   };
   selectEvent = SelectEvent;
 
-  _areCalendarsShown: boolean = false;
+  _areCalendarsShown = false;
   _selected: Moment[] = [];
   _currentDateView: Moment;
 
@@ -322,7 +322,7 @@ export class DatePickerComponent implements OnChanges,
   }
 
   setElementPositionInDom(): void {
-    this.calendarWrapper = <HTMLElement>this.calendarContainer.nativeElement;
+    this.calendarWrapper = this.calendarContainer.nativeElement as HTMLElement;
     this.setInputElementContainer();
     this.popupElem = this.elemRef.nativeElement.querySelector('.app-popup');
     this.handleInnerElementClick(this.popupElem);
@@ -330,9 +330,9 @@ export class DatePickerComponent implements OnChanges,
     const {appendTo} = this.componentConfig;
     if (appendTo) {
       if (typeof appendTo === 'string') {
-        this.appendToElement = <HTMLElement>document.querySelector(<string>appendTo);
+        this.appendToElement = document.querySelector(appendTo as string) as HTMLElement;
       } else {
-        this.appendToElement = <HTMLElement>appendTo;
+        this.appendToElement = appendTo as HTMLElement;
       }
     } else {
       this.appendToElement = this.elemRef.nativeElement;

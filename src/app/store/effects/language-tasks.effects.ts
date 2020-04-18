@@ -15,9 +15,9 @@ export class LanguageTasksEffects {
       ofType(LanguageTasksActions.requestLanguageTasks),
       exhaustMap(action =>
         this.apiService.getTaskItems(
-          action.params.language, 
-          action.params.clientIds, 
-          action.params.contentIds, 
+          action.params.language,
+          action.params.clientIds,
+          action.params.contentIds,
           action.params.notContentIds,
           action.params.endDate,
           action.params.startDate,

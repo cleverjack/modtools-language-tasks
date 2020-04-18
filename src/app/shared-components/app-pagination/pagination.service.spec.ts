@@ -1,4 +1,4 @@
-import {PaginationService} from "./pagination.service";
+import {PaginationService} from './pagination.service';
 import {PaginationInstance} from './pagination-instance';
 
 describe('PaginationService:', () => {

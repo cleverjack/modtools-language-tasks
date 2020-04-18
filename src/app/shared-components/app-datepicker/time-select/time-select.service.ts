@@ -34,11 +34,11 @@ export class TimeSelectService {
       minTime: this.utilsService.onlyTime(config && config.minTime)
     };
 
-    const _config = <ITimeSelectConfigInternal>{
+    const _config = {
       ...this.DEFAULT_CONFIG,
       ...this.utilsService.clearUndefined(config),
       ...timeConfigs
-    };
+    } as ITimeSelectConfigInternal;
 
     moment.locale(_config.locale);
 
@@ -72,7 +72,7 @@ export class TimeSelectService {
   }
 
   decrease(config: ITimeSelectConfigInternal, time: Moment, unit: TimeUnit): Moment {
-    let amount: number = 1;
+    let amount = 1;
     switch (unit) {
       case 'minute':
         amount = config.minutesInterval;
@@ -85,7 +85,7 @@ export class TimeSelectService {
   }
 
   increase(config: ITimeSelectConfigInternal, time: Moment, unit: TimeUnit): Moment {
-    let amount: number = 1;
+    let amount = 1;
     switch (unit) {
       case 'minute':
         amount = config.minutesInterval;

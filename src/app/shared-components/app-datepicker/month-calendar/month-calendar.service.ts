@@ -26,10 +26,10 @@ export class MonthCalendarService {
   }
 
   getConfig(config: IMonthCalendarConfig): IMonthCalendarConfigInternal {
-    const _config = <IMonthCalendarConfigInternal>{
+    const _config = {
       ...this.DEFAULT_CONFIG,
       ...this.utilsService.clearUndefined(config)
-    };
+    } as IMonthCalendarConfigInternal;
 
     this.validateConfig(_config);
 

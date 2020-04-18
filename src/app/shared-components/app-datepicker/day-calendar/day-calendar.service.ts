@@ -30,10 +30,10 @@ export class DayCalendarService {
   }
 
   getConfig(config: IDayCalendarConfig): IDayCalendarConfigInternal {
-    const _config = <IDayCalendarConfigInternal>{
+    const _config = {
       ...this.DEFAULT_CONFIG,
       ...this.utilsService.clearUndefined(config)
-    };
+    } as IDayCalendarConfigInternal;
 
     this.utilsService.convertPropsToMoment(_config, _config.format, ['min', 'max']);
 
@@ -49,7 +49,7 @@ export class DayCalendarService {
       map[day] = index;
 
       return map;
-    }, <{[key: string]: number}>{});
+    }, {} as {[key: string]: number});
   }
 
   generateMonthArray(config: IDayCalendarConfigInternal, month: Moment, selected: Moment[]): IDay[][] {
@@ -159,7 +159,7 @@ export class DayCalendarService {
       map[index] = day;
 
       return map;
-    }, <{[key: number]: string}>{});
+    }, {} as {[key: number]: string});
   }
 
   getMonthCalendarConfig(componentConfig: IDayCalendarConfigInternal): IMonthCalendarConfig {

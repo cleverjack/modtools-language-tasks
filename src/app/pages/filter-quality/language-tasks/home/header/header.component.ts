@@ -19,7 +19,5 @@ export class LanguageTasksHomeHeaderComponent implements OnInit {
     // private filterService: FilterService
   ) { }
 
-  ngOnInit() {
-    
-  }
+  ngOnInit() { }
 }

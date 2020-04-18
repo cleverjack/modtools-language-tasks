@@ -41,12 +41,12 @@ export class DayTimeCalendarService {
     let updated = moment(day.format(DAY_FORMAT) + time.format(TIME_FORMAT), COMBINED_FORMAT);
 
     if (config.min) {
-      const min = <Moment>config.min;
+      const min = config.min as Moment;
       updated = min.isAfter(updated) ? min : updated;
     }
 
     if (config.max) {
-      const max = <Moment>config.max;
+      const max = config.max as Moment;
       updated = max.isBefore(updated) ? max : updated;
     }
 

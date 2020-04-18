@@ -21,7 +21,7 @@ export class AppCheckboxComponent implements ControlValueAccessor, OnInit {
 
   _value: boolean;
   initValue: boolean;
-  additionalClassName: string = '';
+  additionalClassName = '';
 
   private propagateChange = (_: any) => {};
   private propagateTouched = () => {};

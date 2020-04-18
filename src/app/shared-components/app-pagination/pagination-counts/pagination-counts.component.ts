@@ -10,9 +10,9 @@ export class PaginationCountsComponent implements OnInit {
   constructor() { }
 
   @Input() countArray: Array<number> = [15, 50, 100, 500, 1000];
-  @Input() currentIndex: number = 0;
+  @Input() currentIndex = 0;
   @Output() pageCountChange: EventEmitter<number> = new EventEmitter<number>();
-  
+
   ngOnInit(): void {
   }
 

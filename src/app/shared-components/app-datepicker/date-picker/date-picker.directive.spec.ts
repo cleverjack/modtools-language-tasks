@@ -9,7 +9,7 @@ import {inject, TestBed} from '@angular/core/testing';
 class TestComponent {
 }
 
-describe('Directive: DpDayPicker', () => {
+describe('Directive: AppDayPicker', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [TestComponent],

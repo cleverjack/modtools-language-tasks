@@ -29,7 +29,7 @@ export class CommentsPanelComponent implements OnInit {
   }
 
   submit(ev) {
-    let body: CommentInput = {};
+    const body: CommentInput = {};
     body.text = this.commentText;
 
     this.apiService.addComment(this.queueId, this.contentId, body).subscribe(resp => {

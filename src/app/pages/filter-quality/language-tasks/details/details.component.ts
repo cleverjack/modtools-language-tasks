@@ -67,7 +67,7 @@ export class DetailsComponent implements OnInit {
   task: TaskOutputItems;
   dueDate: moment.Moment;
   taskFormData: TaskInput; // formdata when create or edit task
-  pageType: number = 0; // enum: 0 - details page, 1 - edit page, 2 - create page
+  pageType = 0; // enum: 0 - details page, 1 - edit page, 2 - create page
   accountOptions: Array<any> = [
     {
       id: 'All',
@@ -92,7 +92,7 @@ export class DetailsComponent implements OnInit {
       label: 'Jhon Smith'
     }
   ];
-  
+
   constructor(
     private readonly store: Store,
     private router: Router,
@@ -101,16 +101,16 @@ export class DetailsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    let taskId = this.route.snapshot.paramMap.get('id');
-    
+    const taskId = this.route.snapshot.paramMap.get('id');
+
     if (taskId) {
-      let params: LanguageTasksActions.LanguageTasksRequestInterface = {
+      const params: LanguageTasksActions.LanguageTasksRequestInterface = {
         language: 'en',
         clientIds: [12],
         contentIds: [taskId]
       };
-  
-      this.store.dispatch(LanguageTasksActions.requestLanguageTaskDetails({params: params}));
+
+      this.store.dispatch(LanguageTasksActions.requestLanguageTaskDetails({params}));
       this.store.pipe(select(LanguageTasksSeletor._getLanguageTaskDetails))
       // .pipe(
       //   tap(res => {
@@ -120,7 +120,7 @@ export class DetailsComponent implements OnInit {
       //   map(res => res ? res.items : [])
       // );
       .subscribe((languageTasks: TaskOutput) => {
-        let tasks = languageTasks ? languageTasks.items : [];
+        const tasks = languageTasks ? languageTasks.items : [];
         if (tasks.length > 0) {
           this.task = tasks[0];
           this.dueDate = moment(this.task.data.dueDate);
@@ -172,7 +172,7 @@ export class DetailsComponent implements OnInit {
         //   }
         // };
         break;
-      default: 
+      default:
         break;
     }
   }
@@ -195,7 +195,7 @@ export class DetailsComponent implements OnInit {
       // this.router.navigate(['/filter-quality/language-tasks']);
     }
     if (this.pageType === 2) {
-      let formData: TaskInput = {
+      const formData: TaskInput = {
         clientId: this.taskFormData.clientId,
         language: this.taskFormData.language,
         priority: this.taskFormData.priority,
@@ -206,7 +206,7 @@ export class DetailsComponent implements OnInit {
           additionalProp1: {}
         }
       };
-      
+
       this.apiService.addTaskItems([formData]).subscribe(resp => {
         if (resp.success) {
           this.router.navigate(['/filter-quality/language-tasks']);

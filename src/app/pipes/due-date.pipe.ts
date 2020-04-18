@@ -9,14 +9,14 @@ export class DueDatePipe implements PipeTransform {
 
   transform(value: any, ...args: any[]): any {
     if (typeof value === 'number') {
-      let dueDate = moment(value);
+      const dueDate = moment(value);
 
-      let diff = moment.duration(dueDate.diff(moment()));
-      let diffInYear = diff.asYears();
-      let diffInMonth = diff.asMonths();
-      let diffInWeek = diff.asWeeks();
-      let diffInDay = diff.asDays();
-     
+      const diff = moment.duration(dueDate.diff(moment()));
+      const diffInYear = diff.asYears();
+      const diffInMonth = diff.asMonths();
+      const diffInWeek = diff.asWeeks();
+      const diffInDay = diff.asDays();
+
       if (Math.abs(diffInYear) >= 1) {
         return dueDate.format('MMM DD, YYYY');
       } else {
@@ -39,9 +39,9 @@ export class DueDatePipe implements PipeTransform {
             return Math.floor(Math.abs(diffInDay)) + ' Days' + (diffInDay < 0 ? ' Ago' : '');
           }
         }
-      } 
+      }
     }
-    
+
     return moment().unix();
   }
 

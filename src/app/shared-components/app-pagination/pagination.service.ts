@@ -34,7 +34,7 @@ export class PaginationService {
      */
     private updateInstance(instance: PaginationInstance): boolean {
         let changed = false;
-        for (let prop in this.instances[instance.id]) {
+        for (const prop in this.instances[instance.id]) {
             if (instance[prop] !== this.instances[instance.id][prop]) {
                 this.instances[instance.id][prop] = instance[prop];
                 changed = true;
@@ -57,8 +57,8 @@ export class PaginationService {
      */
     public setCurrentPage(id: string, page: number) {
         if (this.instances[id]) {
-            let instance = this.instances[id];
-            let maxPage = Math.ceil(instance.totalItems / instance.itemsPerPage);
+            const instance = this.instances[id];
+            const maxPage = Math.ceil(instance.totalItems / instance.itemsPerPage);
             if (page <= maxPage && 1 <= page) {
                 this.instances[id].currentPage = page;
                 this.change.emit(id);
@@ -101,8 +101,8 @@ export class PaginationService {
      * Perform a shallow clone of an object.
      */
     private clone(obj: any): any {
-        var target = {};
-        for (var i in obj) {
+        const target = {};
+        for (const i in obj) {
             if (obj.hasOwnProperty(i)) {
                 target[i] = obj[i];
             }

@@ -21,7 +21,7 @@ export interface SelectType {
     ]
 })
 export class AppSelectComponent implements ControlValueAccessor, OnInit{
-    
+
     @Input() items: SelectType[] = [];
     @Input() selectedItem: SelectType;
     @Input() displayType = 'label';

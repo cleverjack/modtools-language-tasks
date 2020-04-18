@@ -93,13 +93,13 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
   @Output() onRightNav: EventEmitter<INavEvent> = new EventEmitter();
   @Output() onLeftSecondaryNav: EventEmitter<INavEvent> = new EventEmitter();
   @Output() onRightSecondaryNav: EventEmitter<INavEvent> = new EventEmitter();
-  isInited: boolean = false;
+  isInited = false;
   componentConfig: IMonthCalendarConfigInternal;
   yearMonths: IMonth[][];
   inputValue: CalendarValue;
   inputValueType: ECalendarValue;
   validateFn: DateValidator;
-  _shouldShowCurrent: boolean = true;
+  _shouldShowCurrent = true;
   navLabel: string;
   showLeftNav: boolean;
   showRightNav: boolean;

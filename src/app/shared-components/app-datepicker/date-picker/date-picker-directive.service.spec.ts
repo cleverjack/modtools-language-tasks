@@ -15,13 +15,13 @@ describe('Service: DatePickerDirective', () => {
     (service: DatePickerDirectiveService, stubUtilsService: UtilsService) => {
       stubUtilsService.closestParent = jasmine.createSpy('closestParent').and.returnValue(fakeElement);
 
-      const baseElement = <any>{};
+      const baseElement = {} as any;
       const element1 = service.convertToHTMLElement({nativeElement: fakeElement}, baseElement);
       expect(element1).toBe(fakeElement);
       expect(stubUtilsService.closestParent).not.toHaveBeenCalled();
 
       const element2 = service.convertToHTMLElement('.notFound', baseElement);
-      expect(element2).toBe(<HTMLElement>fakeElement);
+      expect(element2).toBe(fakeElement as HTMLElement);
       expect(stubUtilsService.closestParent).toHaveBeenCalledWith(baseElement, '.notFound');
     }));
 

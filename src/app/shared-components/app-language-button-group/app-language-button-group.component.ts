@@ -15,7 +15,7 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
 })
 export class AppLanguageButtonGroupComponent implements OnInit {
   @Input() languages: Array<string> = ['All', 'en', 'fr', 'pt', 'it', 'ru'];
-  @Input() currentIndex: number = 0;
+  @Input() currentIndex = 0;
   @Output() languageChange: EventEmitter<number> = new EventEmitter<number>();
   _value: string;
   private propagateChange = (_: any) => {};

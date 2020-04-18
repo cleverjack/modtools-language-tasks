@@ -22,7 +22,7 @@ describe('PaginatePipe:', () => {
     });
 
     it('should truncate collection', () => {
-        let result = pipe.transform(collection, { itemsPerPage: 10, currentPage: 1 });
+        const result = pipe.transform(collection, { itemsPerPage: 10, currentPage: 1 });
 
         expect(result.length).toBe(10);
         expect(result[0]).toBe('item 1');
@@ -31,7 +31,7 @@ describe('PaginatePipe:', () => {
 
     it('should register with the PaginationService', () => {
         pipe.transform(collection, { itemsPerPage: 10, currentPage: 1 });
-        let instance = paginationService.getInstance();
+        const instance = paginationService.getInstance();
         expect(instance).toBeDefined();
         expect(instance.itemsPerPage).toBe(10);
         expect(instance.totalItems).toBe(100);
@@ -50,7 +50,7 @@ describe('PaginatePipe:', () => {
     });
 
     it('should use default id if none specified', () => {
-        let config = {
+        const config = {
             itemsPerPage: 10,
             currentPage: 1
         };
@@ -64,13 +64,13 @@ describe('PaginatePipe:', () => {
     });
 
     it('should not break when totalItems is specified for in-memory paging', () => {
-        let config = {
+        const config = {
             itemsPerPage: 10,
             currentPage: 1,
             totalItems: 100
         };
 
-        let result = pipe.transform(collection, config);
+        const result = pipe.transform(collection, config);
         expect(result.length).toBe(10);
         expect(result[0]).toBe('item 1');
         expect(result[9]).toBe('item 10');
@@ -78,42 +78,42 @@ describe('PaginatePipe:', () => {
 
     describe('collection modification', () => {
         it('should detect simple push or splice without insert', () => {
-            let config = {
+            const config = {
                 itemsPerPage: 10,
                 currentPage: 1
             };
             collection = ['1', '2', '3'];
-            let result1 = pipe.transform(collection, config);
+            const result1 = pipe.transform(collection, config);
 
             expect(result1.length).toBe(3);
 
             collection.push('4');
-            let result2 = pipe.transform(collection, config);
+            const result2 = pipe.transform(collection, config);
 
             expect(result2.length).toBe(4);
 
             collection.splice(3, 1); // remove 4th
-            let result3 = pipe.transform(collection, config);
+            const result3 = pipe.transform(collection, config);
 
             expect(result3.length).toBe(3);
 
             collection.shift(); // remove 1st
-            let result4 = pipe.transform(collection, config);
+            const result4 = pipe.transform(collection, config);
 
             expect(result4.length).toBe(2);
         });
 
         it('should detect value changes in collection', () => {
-            let config = {
+            const config = {
                 itemsPerPage: 10,
                 currentPage: 1
             };
             collection = ['not changed', '2', '3'];
             pipe.transform(collection, config);
 
-            let changed = 'changed';
+            const changed = 'changed';
             collection[0] = changed;
-            let result = pipe.transform(collection, config);
+            const result = pipe.transform(collection, config);
 
             expect(result[0]).toBe(changed)
 
@@ -121,18 +121,18 @@ describe('PaginatePipe:', () => {
     });
 
     it('should allow independent instances by setting an id', () => {
-        let config1 = {
+        const config1 = {
             id: 'first_one',
             itemsPerPage: 10,
             currentPage: 1
         };
-        let config2 = {
+        const config2 = {
             id: 'other_one',
             itemsPerPage: 50,
             currentPage: 2
         };
-        let result1 = pipe.transform(collection, config1);
-        let result2 = pipe.transform(collection, config2);
+        const result1 = pipe.transform(collection, config1);
+        const result2 = pipe.transform(collection, config2);
 
         expect(result1.length).toBe(10);
         expect(result1[0]).toBe('item 1');
@@ -157,7 +157,7 @@ describe('PaginatePipe:', () => {
 
         it('should truncate collection', () => {
             collection = collection.slice(0, 10);
-            let result = pipe.transform(collection, config);
+            const result = pipe.transform(collection, config);
 
             expect(result.length).toBe(10);
             expect(result[0]).toBe('item 1');
@@ -167,7 +167,7 @@ describe('PaginatePipe:', () => {
         it('should display page 2', () => {
             collection = collection.slice(10, 20);
             config.currentPage = 2;
-            let result = pipe.transform(collection, config);
+            const result = pipe.transform(collection, config);
 
             expect(result.length).toBe(10);
             expect(result[0]).toBe('item 11');
@@ -176,13 +176,13 @@ describe('PaginatePipe:', () => {
     });
 
     it('should return identical array for the same input values', () => {
-        let config = {
+        const config = {
             id: 'first_one',
             itemsPerPage: 10,
             currentPage: 1
         };
-        let result1 = pipe.transform(collection, config);
-        let result2 = pipe.transform(collection, config);
+        const result1 = pipe.transform(collection, config);
+        const result2 = pipe.transform(collection, config);
 
         expect(result1 === result2).toBe(true);
     });
@@ -193,30 +193,30 @@ describe('PaginatePipe:', () => {
             let input;
 
             input = '';
-            expect(pipe.transform(<any>input, { itemsPerPage: 10 })).toBe(input, 'string');
+            expect(pipe.transform(input as any, { itemsPerPage: 10 })).toBe(input, 'string');
 
             input = 1;
-            expect(pipe.transform(<any>input, { itemsPerPage: 10 })).toBe(input, 'number');
+            expect(pipe.transform(input as any, { itemsPerPage: 10 })).toBe(input, 'number');
 
             input = {};
-            expect(pipe.transform(<any>input, { itemsPerPage: 10 })).toBe(input, 'object');
+            expect(pipe.transform(input as any, { itemsPerPage: 10 })).toBe(input, 'object');
 
             input = null;
-            expect(pipe.transform(<any>input, { itemsPerPage: 10 })).toBe(input, 'null');
+            expect(pipe.transform(input as any, { itemsPerPage: 10 })).toBe(input, 'null');
 
             input = undefined;
-            expect(pipe.transform(<any>input, { itemsPerPage: 10 })).toBe(input, 'undefined');
+            expect(pipe.transform(input as any, { itemsPerPage: 10 })).toBe(input, 'undefined');
         });
 
-        it('should work with a string as itemsPerPage arg', function() {
-            let result = pipe.transform(collection, { itemsPerPage: '10', currentPage: 2});
+        it('should work with a string as itemsPerPage arg', () => {
+            const result = pipe.transform(collection, { itemsPerPage: '10', currentPage: 2});
             expect(result.length).toBe(10);
             expect(result[0]).toBe('item 11');
             expect(result[9]).toBe('item 20');
         });
 
-        it('should work with a string as currentPage arg', function() {
-            let result = pipe.transform(collection, { itemsPerPage: 10, currentPage: '2'});
+        it('should work with a string as currentPage arg', () => {
+            const result = pipe.transform(collection, { itemsPerPage: 10, currentPage: '2'});
             expect(result.length).toBe(10);
             expect(result[0]).toBe('item 11');
             expect(result[9]).toBe('item 20');
@@ -250,15 +250,15 @@ describe('PaginatePipe:', () => {
         }));
 
         it('should display the correct number of items per page (10)', async(() => {
-            let fixture = TestBed.createComponent(ComponentTestComponent);
+            const fixture = TestBed.createComponent(ComponentTestComponent);
             fixture.detectChanges();
 
             expect(getListItems(fixture).length).toBe(10);
         }));
 
         it('should display the correct number of items per page (50)', async(() => {
-            let fixture = TestBed.createComponent(ComponentTestComponent);
-            let instance: ComponentTestComponent = fixture.componentInstance;
+            const fixture = TestBed.createComponent(ComponentTestComponent);
+            const instance: ComponentTestComponent = fixture.componentInstance;
             instance.config.itemsPerPage = 50;
             fixture.detectChanges();
 
@@ -266,14 +266,14 @@ describe('PaginatePipe:', () => {
         }));
 
         it('should display the correct number of items, after itemsPerPage & currentPage change', async(() => {
-            let fixture = TestBed.createComponent(ComponentTestComponent);
-            let instance: ComponentTestComponent = fixture.componentInstance;
+            const fixture = TestBed.createComponent(ComponentTestComponent);
+            const instance: ComponentTestComponent = fixture.componentInstance;
             instance.config.itemsPerPage = 10;
             fixture.detectChanges();
 
             expect(getListItems(fixture).length).toBe(10);
 
-            let expected = ['item 4', 'item 5', 'item 6'];
+            const expected = ['item 4', 'item 5', 'item 6'];
             instance.config.itemsPerPage = 3;
             instance.config.currentPage = 2;
             fixture.detectChanges();
@@ -283,18 +283,18 @@ describe('PaginatePipe:', () => {
         }));
 
         it('should display the correct items on init', async(() => {
-            let fixture = TestBed.createComponent(ComponentTestComponent);
-            let instance: ComponentTestComponent = fixture.componentInstance;
+            const fixture = TestBed.createComponent(ComponentTestComponent);
+            const instance: ComponentTestComponent = fixture.componentInstance;
             instance.config.itemsPerPage = 3;
             fixture.detectChanges();
-            let expected = ['item 1', 'item 2', 'item 3'];
+            const expected = ['item 1', 'item 2', 'item 3'];
 
             expect(getListItemsText(fixture)).toEqual(expected);
         }));
 
         it('should not mutate the collection', async(() => {
-            let fixture = TestBed.createComponent(ComponentTestComponent);
-            let instance: ComponentTestComponent = fixture.componentInstance;
+            const fixture = TestBed.createComponent(ComponentTestComponent);
+            const instance: ComponentTestComponent = fixture.componentInstance;
 
             expect(instance.collection.length).toBe(100);
 
@@ -310,12 +310,12 @@ describe('PaginatePipe:', () => {
         }));
 
         it('should default to page 1 if currentPage not set', async(() => {
-            let fixture = TestBed.createComponent(ComponentTestComponent);
-            let instance: ComponentTestComponent = fixture.componentInstance;
+            const fixture = TestBed.createComponent(ComponentTestComponent);
+            const instance: ComponentTestComponent = fixture.componentInstance;
             instance.config.itemsPerPage = 3;
             instance.config.currentPage = undefined;
             fixture.detectChanges();
-            let expected = ['item 1', 'item 2', 'item 3'];
+            const expected = ['item 1', 'item 2', 'item 3'];
 
             expect(getListItemsText(fixture)).toEqual(expected);
         }));

@@ -17,16 +17,16 @@ import {
 })
 export class CalendarNavComponent {
   @Input() label: string;
-  @Input() isLabelClickable: boolean = false;
-  @Input() showLeftNav: boolean = true;
-  @Input() showLeftSecondaryNav: boolean = false;
-  @Input() showRightNav: boolean = true;
-  @Input() showRightSecondaryNav: boolean = false;
-  @Input() leftNavDisabled: boolean = false;
-  @Input() leftSecondaryNavDisabled: boolean = false;
-  @Input() rightNavDisabled: boolean = false;
-  @Input() rightSecondaryNavDisabled: boolean = false;
-  @Input() showGoToCurrent: boolean = true;
+  @Input() isLabelClickable = false;
+  @Input() showLeftNav = true;
+  @Input() showLeftSecondaryNav = false;
+  @Input() showRightNav = true;
+  @Input() showRightSecondaryNav = false;
+  @Input() leftNavDisabled = false;
+  @Input() leftSecondaryNavDisabled = false;
+  @Input() rightNavDisabled = false;
+  @Input() rightSecondaryNavDisabled = false;
+  @Input() showGoToCurrent = true;
   @HostBinding('class') @Input() theme: string;
 
   @Output() onLeftNav: EventEmitter<null> = new EventEmitter();

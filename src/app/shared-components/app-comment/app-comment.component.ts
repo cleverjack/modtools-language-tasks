@@ -7,12 +7,12 @@ import { Comment, CommentInput, DefaultService } from 'src/app/api';
   styleUrls: ['./app-comment.component.less']
 })
 export class AppCommentComponent implements OnInit {
-  @Input() isSmall: boolean = false;
+  @Input() isSmall = false;
   @Input() comment: Comment;
   @Input() queueId: string;
   @Input() contentId: string;
   instruction: string;
-  isEdit: boolean = false;
+  isEdit = false;
 
   constructor(private apiService: DefaultService) { }
 
@@ -29,7 +29,7 @@ export class AppCommentComponent implements OnInit {
   }
 
   onSave(): void {
-    let body: CommentInput = {};
+    const body: CommentInput = {};
     body.text = this.instruction
 
     this.apiService.updateComment(this.queueId, this.contentId, this.comment.commentId, body).subscribe(resp => {

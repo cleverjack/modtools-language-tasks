@@ -25,7 +25,8 @@ export class UtilsService {
   static debounce(func: Function, wait: number) {
     let timeout;
     return function () {
-      const context = this, args = arguments;
+      const context = this;
+      const args = arguments;
       timeout = clearTimeout(timeout);
       setTimeout(() => {
         func.apply(context, args);
@@ -102,16 +103,16 @@ export class UtilsService {
     let retVal: Moment[];
     switch (this.getInputType(value, config.allowMultiSelect)) {
       case (ECalendarValue.String):
-        retVal = value ? [moment(<string>value, config.format, true)] : [];
+        retVal = value ? [moment(value as string, config.format, true)] : [];
         break;
       case (ECalendarValue.StringArr):
-        retVal = (<string[]>value).map(v => v ? moment(v, config.format, true) : null).filter(Boolean);
+        retVal = (value as string[]).map(v => v ? moment(v, config.format, true) : null).filter(Boolean);
         break;
       case (ECalendarValue.Moment):
-        retVal = value ? [(<Moment>value).clone()] : [];
+        retVal = value ? [(value as Moment).clone()] : [];
         break;
       case (ECalendarValue.MomentArr):
-        retVal = (<Moment[]>value || []).map(v => v.clone());
+        retVal = (value as Moment[] || []).map(v => v.clone());
         break;
       default:
         retVal = [];
@@ -145,11 +146,11 @@ export class UtilsService {
       tmpVal = [value];
     } else if (Array.isArray(value)) {
       if (value.length) {
-        tmpVal = (<SingleCalendarValue[]>value).map((v) => {
+        tmpVal = (value as SingleCalendarValue[]).map((v) => {
           return this.convertToMoment(v, format).format(format);
         });
       } else {
-        tmpVal = <string[]>value;
+        tmpVal = value as string[];
       }
     } else if (moment.isMoment(value)) {
       tmpVal = [value.format(format)];
@@ -187,7 +188,7 @@ export class UtilsService {
     if (!element) {
       return undefined;
     }
-    const match = <HTMLElement>element.querySelector(selector);
+    const match = element.querySelector(selector) as HTMLElement;
     return match || this.closestParent(element.parentElement, selector);
   }
 
@@ -345,7 +346,7 @@ export class UtilsService {
     if (!elem) {
       return null;
     } else if (typeof elem === 'string') {
-      return <HTMLElement>document.querySelector(elem);
+      return document.querySelector(elem) as HTMLElement;
     } else {
       return elem;
     }

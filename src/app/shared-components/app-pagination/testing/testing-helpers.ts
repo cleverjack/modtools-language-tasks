@@ -27,7 +27,7 @@ export function getListItems(fixture: ComponentFixture<any>): HTMLLIElement[] {
  * Returns the PaginationControlsDirective from the template of the ComponentTestComponent.
  */
 export function getControlsDirective(fixture: ComponentFixture<ComponentTestComponent>): PaginationControlsDirective {
-    return fixture.debugElement.query(By.css('pagination-template')).references['p'];
+    return fixture.debugElement.query(By.css('app-pagination-template')).references.p;
 }
 
 /**
@@ -39,7 +39,7 @@ export function getControlsDirective(fixture: ComponentFixture<ComponentTestComp
 export function getPageLinkItems(fixture: ComponentFixture<any>,
                                  selector: string = 'pagination-controls li',
                                  includeAll: boolean = false): string[] {
-    let all = fixture.debugElement.queryAll(By.css(selector))
+    const all = fixture.debugElement.queryAll(By.css(selector))
         .filter(el => (el.nativeElement as HTMLLIElement).classList.contains('small-screen') === false)
         .map((el: DebugElement) => el.nativeElement.innerText);
 
@@ -82,10 +82,10 @@ export function overrideTemplate<T>(component: Type<T>, templateString: string):
     </pagination-controls>`
 })
 export class ComponentTestComponent {
-    maxSize: number = 9;
-    directionLinks: boolean = true;
-    autoHide: boolean = true;
-    responsive: boolean = false;
+    maxSize = 9;
+    directionLinks = true;
+    autoHide = true;
+    responsive = false;
     collection: string[] = [];
     config: PaginationInstance = {
         id: 'test',

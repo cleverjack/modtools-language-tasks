@@ -38,11 +38,11 @@ export class DatePickerService {
 
   // todo:: add unit tests
   getConfig(config: IDatePickerConfig, mode: CalendarMode = 'daytime'): IDatePickerConfigInternal {
-    const _config = <IDatePickerConfigInternal>{
+    const _config = {
       ...this.defaultConfig,
       format: this.getDefaultFormatByMode(mode),
       ...this.utilsService.clearUndefined(config)
-    };
+    } as IDatePickerConfigInternal;
 
     this.utilsService.convertPropsToMoment(_config, _config.format, ['min', 'max']);
 

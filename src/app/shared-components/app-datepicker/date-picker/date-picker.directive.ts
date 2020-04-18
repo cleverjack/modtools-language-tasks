@@ -1,7 +1,7 @@
 import {CalendarMode} from '../common/types/calendar-mode';
 import {IDatePickerDirectiveConfig} from './date-picker-directive-config.model';
 import {DatePickerDirectiveService} from './date-picker-directive.service';
-import {IDpDayPickerApi} from './date-picker.api';
+import {IAppDayPickerApi} from './date-picker.api';
 import {DatePickerComponent} from './date-picker.component';
 import {
   ComponentFactoryResolver,
@@ -21,9 +21,9 @@ import {INavEvent} from '../common/models/navigation-event.model';
 import {UtilsService} from '../common/services/utils/utils.service'
 
 @Directive({
-  exportAs: 'dpDayPicker',
+  exportAs: 'appDayPicker',
   providers: [DatePickerDirectiveService],
-  selector: '[dpDayPicker]'
+  selector: '[appDayPicker]'
 })
 export class DatePickerDirective implements OnInit {
 
@@ -31,7 +31,7 @@ export class DatePickerDirective implements OnInit {
     return this._config;
   }
 
-  @Input('dpDayPicker') set config(config: IDatePickerDirectiveConfig) {
+  @Input('appDayPicker') set config(config: IDatePickerDirectiveConfig) {
     this._config = this.service.getConfig(config, this.viewContainerRef.element, this.attachTo);
     this.updateDatepickerConfig();
     this.markForCheck();
@@ -149,7 +149,7 @@ export class DatePickerDirective implements OnInit {
   @Output() onRightNav: EventEmitter<INavEvent> = new EventEmitter();
   @Output() onSelect: EventEmitter<ISelectionEvent> = new EventEmitter();
   datePicker: DatePickerComponent;
-  api: IDpDayPickerApi;
+  api: IAppDayPickerApi;
 
   private _config: IDatePickerDirectiveConfig;
 
@@ -227,7 +227,7 @@ export class DatePickerDirective implements OnInit {
 
       if (errors) {
         if (errors.hasOwnProperty('format')) {
-          const {given} = errors['format'];
+          const {given} = errors.format;
           this.datePicker.inputElementValue = given;
           if (!changedByInput) {
             this.formControl.control.setValue(given);

@@ -21,9 +21,7 @@ export class LanguageTasksDetailsHeaderComponent implements OnInit {
     private filterService: FilterService
   ) { }
 
-  ngOnInit() {
-    
-  }
+  ngOnInit() { }
 
   editTask(): void {
     this.pageType = 1;
