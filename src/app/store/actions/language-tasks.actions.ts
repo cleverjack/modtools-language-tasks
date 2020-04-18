@@ -1,10 +1,25 @@
 import { createAction, props } from '@ngrx/store';
-import { TaskOutput, TaskInput, InlineResponse201 } from 'src/app/api';
+import { TaskOutput, TaskInput, InlineResponse201, ModeratorId } from 'src/app/api';
 
 export interface LanguageTasksRequestInterface {
     language: string,
     clientIds?: Array<number>,
-    contentIds?: Array<string>
+    contentIds?: Array<string>,
+    notContentIds?: Array<string>, 
+    endDate?: number, 
+    startDate?: number, 
+    reviewedStartDate?: number, 
+    reviewedEndDate?: number, 
+    checkoutAvailable?: boolean, 
+    doneByModeratorId?: ModeratorId, 
+    assignedToModeratorId?: ModeratorId, 
+    limit?: number, 
+    offset?: number, 
+    sortBy?: string, 
+    tags?: Array<string>, 
+    text?: string, 
+    unresolvedComments?: boolean, 
+    observe?: 'body', reportProgress?: boolean
 }
 export interface LanguageTaskAddRequestInterface {
     body?: Array<TaskInput>, 

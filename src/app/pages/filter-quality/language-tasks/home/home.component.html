@@ -2,10 +2,10 @@
 <div class="language-tasks-home">
     <div class="tabs-wrapper">
         <ul class="horizontal-nav">
-            <li class="nav-item active">All</li>
-            <li class="nav-item">Pending</li>
-            <li class="nav-item">Active</li>
-            <li class="nav-item">Done</li>
+            <li class="nav-item" [ngClass]="{'active': selectedTab === 'all'}" (click)="selectTab('all')">All</li>
+            <li class="nav-item" [ngClass]="{'active': selectedTab === 'pending'}" (click)="selectTab('pending')">Pending</li>
+            <li class="nav-item" [ngClass]="{'active': selectedTab === 'active'}" (click)="selectTab('active')">Active</li>
+            <li class="nav-item" [ngClass]="{'active': selectedTab === 'done'}" (click)="selectTab('done')">Done</li>
         </ul>
     </div>
     <div class="table-wrapper"> 
@@ -21,7 +21,7 @@
             <div class="th actions">Actions</div>
         </div>
         <div class="table-body"> 
-            <div class="tr" *ngFor="let task of tasks | paginate: { itemsPerPage: countPerPage, currentPage: p, totalItems: totalPages }"> 
+            <div class="tr" *ngFor="let task of tasks | paginate: { itemsPerPage: countPerPage, currentPage: currentPage, totalItems: totalCount }"> 
                 <div class="td checkbox">
                     <app-checkbox type="accent"></app-checkbox>
                 </div>
@@ -45,7 +45,7 @@
         </div>
         <div class="pagination-wrapper"> 
             <app-pagination-controls
-                (pageChange)="p = $event;"
+                (pageChange)="onPageChange($event)"
                 >
             </app-pagination-controls>
             <div class="pagination-page-count-wrapper"> 

@@ -14,7 +14,25 @@ export class LanguageTasksEffects {
     this.actions$.pipe(
       ofType(LanguageTasksActions.requestLanguageTasks),
       exhaustMap(action =>
-        this.apiService.getTaskItems(action.params.language, action.params.clientIds).pipe(
+        this.apiService.getTaskItems(
+          action.params.language, 
+          action.params.clientIds, 
+          action.params.contentIds, 
+          action.params.notContentIds,
+          action.params.endDate,
+          action.params.startDate,
+          action.params.reviewedEndDate,
+          action.params.reviewedEndDate,
+          action.params.checkoutAvailable,
+          action.params.doneByModeratorId,
+          action.params.assignedToModeratorId,
+          action.params.limit,
+          action.params.offset,
+          action.params.sortBy,
+          action.params.tags,
+          action.params.text,
+          action.params.unresolvedComments
+        ).pipe(
           map(response => {
             return LanguageTasksActions.successLanguageTasks({ languageTasks: response });
           }),

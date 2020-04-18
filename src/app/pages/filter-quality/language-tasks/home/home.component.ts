@@ -2,9 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import * as LanguageTasksSeletor from '../../../../store/reducers/language-tasks.reducers';
 import * as LanguageTasksActions from '../../../../store/actions/language-tasks.actions';
-import { TaskOutputItems, TaskOutput } from 'src/app/api';
+import { TaskOutputItems, TaskOutput, DefaultService } from 'src/app/api';
 import { tap, map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import * as moment from 'moment';
+import { init } from '@sentry/browser';
 
 @Component({
   selector: 'app-language-tasks-home',
@@ -14,7 +16,7 @@ import { Observable } from 'rxjs';
 export class HomeComponent implements OnInit {
 
   p: number;
-  totalPages: number;
+  totalCount: number;
   isCommentsPanel: boolean;
   commentQueueId: string;
   commentContentId: string;
@@ -22,9 +24,14 @@ export class HomeComponent implements OnInit {
   // tasks: Observable<Array<TaskOutputItems>>;
   tasks: Array<TaskOutputItems>;
   perPageCounts: Array<number> = [15, 50, 100, 500, 1000];
-  countPerPage: number = 15;
-  
-  constructor(private readonly store: Store) { }
+  countPerPage: number = this.perPageCounts[0];
+  currentPage: number = 1;
+  selectedTab: string = 'all';
+
+  constructor(
+    private readonly store: Store,
+    private apiService: DefaultService
+  ) { }
 
   ngOnInit(): void {
     let params: LanguageTasksActions.LanguageTasksRequestInterface = {
@@ -42,13 +49,56 @@ export class HomeComponent implements OnInit {
     //   map(res => res ? res.items : [])
     // );
     .subscribe((languageTasks: TaskOutput) => {
-      this.totalPages = languageTasks ? languageTasks.total : 0;
+      this.totalCount = languageTasks ? languageTasks.total : 0;
       this.tasks = languageTasks ? languageTasks.items : [];
     });
   }
 
+  getTaskItems (initial: boolean = false): void {
+    let params: LanguageTasksActions.LanguageTasksRequestInterface = {
+      language: 'en',
+      clientIds: [12],
+      limit: this.countPerPage,
+      offset: initial ? 0 : (this.currentPage - 1) * this.countPerPage
+    };
+
+    switch (this.selectedTab) {
+      case 'all':
+        params.assignedToModeratorId = 'moderator';
+        break;
+      case 'pending':
+        params.checkoutAvailable = true;
+        break;
+      case 'active':
+        params.reviewedEndDate = moment().unix();
+        break;
+      case 'done':
+        params.checkoutAvailable = false;
+        params.reviewedStartDate = 0;
+        break;
+      default:
+        break;
+    }
+
+    this.store.dispatch(LanguageTasksActions.requestLanguageTasks({params: params}));
+  }
+
+  selectTab (id): void {
+    this.selectedTab = id;
+    this.currentPage = 1;
+    this.getTaskItems(true);
+  }
+
+  onPageChange(page) {
+    console.log('page', page);
+    this.currentPage = page;
+    this.getTaskItems();
+  }
+
   onPageCountChange (count): void {
     this.countPerPage = count;
+    this.currentPage = 1;
+    this.getTaskItems();
   }
 
   openCommentsPanel (task): void {
