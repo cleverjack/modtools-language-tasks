@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, Input } from '@angular/core';
 import { Comment, CommentInput, DefaultService } from 'src/app/api';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-comment',
@@ -13,8 +14,10 @@ export class AppCommentComponent implements OnInit {
   @Input() contentId: string;
   instruction: string;
   isEdit = false;
+  moderatorId = 'first.last@company.com';
+  isAdmin = this.userService.isAdmin();
 
-  constructor(private apiService: DefaultService) { }
+  constructor(private apiService: DefaultService, private userService: UserService) { }
 
   ngOnInit(): void {
     if (this.comment) {
@@ -54,6 +57,9 @@ export class AppCommentComponent implements OnInit {
   }
 
   onResolve(): void {
+    if (this.comment.resolved) {
+      return;
+    }
     this.apiService.resolveComment(this.queueId, this.contentId, this.comment.commentId).subscribe(resp => {
       if(resp) {
         this.comment = resp;

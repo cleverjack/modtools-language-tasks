@@ -38,6 +38,17 @@
             background-color: var(--action-button-bg);
             border-radius: var(--action-button-radius);
             margin-left: 20px;
+            cursor: pointer;
+
+            &:hover {
+                background-color: var(--accent);
+                color: white;
+            }
+
+            &.active {
+                background-color: var(--accent);
+                color: white;
+            }
         }
     }
     
@@ -104,6 +115,11 @@
                 background-color: var(--action-button-bg);
                 border-radius: var(--action-button-radius);
                 margin-left: 20px;
+                cursor: pointer;
+
+                &:hover {
+                    background-color: var(--accent);
+                }
             }
         }
         

@@ -65,6 +65,10 @@ export class UserService {
 
   }
 
+  isAdmin(): boolean {
+    return true;
+  }
+
   get preferences () : UserPreferences {
 
     // Use in-memory prefs first
