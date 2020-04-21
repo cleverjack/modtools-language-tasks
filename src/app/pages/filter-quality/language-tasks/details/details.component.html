@@ -55,8 +55,8 @@
             </div>
             <div class="section"> 
                 <p class="section-name">Comments</p>
-                <div class="comment-wrapper"> 
-                    <app-comment></app-comment>
+                <div class="comment-wrapper" *ngFor="let comment of comments"> 
+                    <app-comment [queueId]="'task'" [contentId]="task && task.queueItem.contentId" [comment]="comment"></app-comment>
                 </div>
             </div>
         </div>

@@ -82,12 +82,18 @@
                 border-radius: var(--table-tr-border-radius);
                 margin-bottom: var(--table-tr-space);
 
+                i {
+                    font-size: 16px;
+                }
+
                 .action-view {
                     padding: 4px 12px;
                     width: 80px;
                     background-color: var(--action-button-dark-bg);
                     border-radius: var(--action-button-radius);
                     color: var(--text-inactive-color);
+                    display: flex;
+                    align-items: center;
 
                     i {
                         margin-right: 6px;
@@ -107,6 +113,9 @@
         background-color: var(--page-bg);
         position: relative;
         text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         
         span {
             position: absolute;

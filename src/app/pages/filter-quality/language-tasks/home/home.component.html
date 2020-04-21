@@ -30,14 +30,15 @@
                 <div class="td assign-to">{{task.queueItem.checkout && task.queueItem.checkout.moderatorId ? task.queueItem.checkout.moderatorId : 'Not Assigned'}}</div>
                 <div class="td unresolved-comments">
                     <div class="comment-icon" (click)="openCommentsPanel(task)">
-                        <i class="fas fa-comment-dots"></i>
-                        <span>{{task.queueItem.comments.unresolved}}</span>
+                        <!-- <i class="fas fa-comment-dots"></i> -->
+                        <i class="material-icons md-18">textsms</i>
+                        <span *ngIf="task.queueItem.comments.unresolved">{{task.queueItem.comments.unresolved}}</span>
                     </div>
                 </div>
                 <div class="td due">{{task.data.dueDate | dueDate}}</div>
                 <div class="td actions">
                     <div class="action-view button no-border" [routerLink]="['/filter-quality/language-tasks', task.queueItem.contentId]"> 
-                        <i class="fas fa-eye"></i>
+                        <i class="material-icons">remove_red_eye</i>
                         <span>View</span>
                     </div>
                 </div>

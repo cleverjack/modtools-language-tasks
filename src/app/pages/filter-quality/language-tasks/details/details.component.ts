@@ -5,7 +5,7 @@ import * as moment from 'moment';
 import * as LanguageTasksSeletor from '../../../../store/reducers/language-tasks.reducers';
 import * as LanguageTasksActions from '../../../../store/actions/language-tasks.actions';
 import { Store, select } from '@ngrx/store';
-import { TaskOutput, TaskOutputItems, TaskInput, DefaultService } from 'src/app/api';
+import { TaskOutput, TaskOutputItems, TaskInput, DefaultService, Comment } from 'src/app/api';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { switchMap, map, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
@@ -65,6 +65,7 @@ export class DetailsComponent implements OnInit {
     format: 'MM-DD-YYYY'
   };
   task: TaskOutputItems;
+  comments: Array<Comment> = [];
   dueDate: moment.Moment;
   taskFormData: TaskInput; // formdata when create or edit task
   pageType = 0; // enum: 0 - details page, 1 - edit page, 2 - create page
@@ -112,20 +113,15 @@ export class DetailsComponent implements OnInit {
 
       this.store.dispatch(LanguageTasksActions.requestLanguageTaskDetails({params}));
       this.store.pipe(select(LanguageTasksSeletor._getLanguageTaskDetails))
-      // .pipe(
-      //   tap(res => {
-      //       this.totalPages = res ? res.total : 0;
-      //       this.p = 1;
-      //   }),
-      //   map(res => res ? res.items : [])
-      // );
-      .subscribe((languageTasks: TaskOutput) => {
-        const tasks = languageTasks ? languageTasks.items : [];
-        if (tasks.length > 0) {
-          this.task = tasks[0];
-          this.dueDate = moment(this.task.data.dueDate);
-        }
-      });
+        .subscribe((languageTasks: TaskOutput) => {
+          const tasks = languageTasks ? languageTasks.items : [];
+          if (tasks.length > 0) {
+            this.task = tasks[0];
+            this.dueDate = moment(this.task.data.dueDate);
+            this.getComments(this.task.queueItem.contentId);
+          }
+        });
+
       this.pageType = 0;
     } else {
       this.pageType = 2;
@@ -140,6 +136,14 @@ export class DetailsComponent implements OnInit {
         }
       };
     }
+  }
+
+  getComments(contentId): void {
+    this.apiService.getComments('task', contentId).subscribe(resp => {
+      if (resp) {
+        this.comments = resp;
+      }
+    });
   }
 
   changeTaskAction(type): void {

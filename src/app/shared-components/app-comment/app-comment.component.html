@@ -1,24 +1,30 @@
 <div class="comment-component" [ngClass]="{'small-size': isSmall}">
     <div class="comment-header"> 
         <span class="avatar">
-            <i class="fas fa-user"></i>
+            <!-- <i class="fas fa-user"></i> -->
+            <i class="material-icons">person</i>
         </span>
         <span class="name">Jhon Smith</span>
         <div class="actions"> 
             <span class="action" (click)="onEdit()" *ngIf="!isEdit">
-                <i class="fas fa-pen"></i>
+                <!-- <i class="fas fa-pen"></i> -->
+                <i class="material-icons">edit</i>
             </span>
             <span class="action" (click)="onSave()" *ngIf="isEdit">
-                <i class="fas fa-save"></i>
+                <!-- <i class="fas fa-save"></i> -->
+                <i class="material-icons">save</i>
             </span>
             <span class="action" (click)="onDelete()" *ngIf="!isEdit">
-                <i class="fas fa-trash-alt"></i>
+                <!-- <i class="fas fa-trash-alt"></i> -->
+                <i class="material-icons">delete</i>
             </span>
             <span class="action" (click)="onCancel()" *ngIf="isEdit">
-                <i class="fas fa-times"></i>
+                <!-- <i class="fas fa-times"></i> -->
+                <i class="material-icons">close</i>
             </span>
             <span class="action" (click)="onResolve()">
-                <i class="fas fa-check"></i>
+                <!-- <i class="fas fa-check"></i> -->
+                <i class="material-icons">done</i>
             </span>
         </div>
     </div>
