@@ -9,6 +9,7 @@ import { TaskOutput, TaskOutputItems, TaskInput, DefaultService, Comment } from 
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { switchMap, map, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
+import { LanguageTasksService } from 'src/app/services/language-tasks.service';
 
 const DEF_CONF: IDatePickerConfig = {
   firstDayOfWeek: 'su',
@@ -98,7 +99,8 @@ export class DetailsComponent implements OnInit {
     private readonly store: Store,
     private router: Router,
     private route: ActivatedRoute,
-    private apiService: DefaultService
+    private apiService: DefaultService,
+    private languageTaskService: LanguageTasksService
   ) { }
 
   ngOnInit(): void {
@@ -165,16 +167,6 @@ export class DetailsComponent implements OnInit {
         break;
       case 2:
         this.router.navigate(['/filter-quality/language-tasks/create']);
-        // this.taskFormData = {
-        //   clientId: null,
-        //   language: 'en',
-        //   priority: 0,
-        //   data: {
-        //     task: '',
-        //     instructions: '',
-        //     dueDate: moment()
-        //   }
-        // };
         break;
       default:
         break;
@@ -217,5 +209,24 @@ export class DetailsComponent implements OnInit {
         }
       });
     }
+  }
+
+  onStart(): void {
+    const body = {
+      moderatorId: 'me'
+    };
+    this.apiService.updateItemCheckout('task', this.task.queueItem.contentId, body).subscribe(resp => {
+      if (resp.success) {
+        this.languageTaskService.setCurrentTask(this.task);
+      }
+    });
+  }
+
+  onStop(): void {
+    this.apiService.deleteItemCheckout('task', this.task.queueItem.contentId).subscribe(resp => {
+      if (resp.success) {
+        this.languageTaskService.setCurrentTask(null);
+      }
+    });
   }
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { UserService } from 'src/app/shared-components/user.service';
 import { User } from 'src/app/shared-components/user';
+import { LanguageTasksService } from 'src/app/services/language-tasks.service';
 
 @Component({
   selector: 'main-header',
@@ -12,10 +13,13 @@ export class HeaderComponent implements OnInit {
 
   user:User
 
-  constructor(public UserService:UserService) { }
+  constructor(public UserService:UserService, private languageTaskService: LanguageTasksService) { }
 
   async ngOnInit() {
     this.user = await this.UserService.me();
+    this.languageTaskService.subscribeCurrentTask().subscribe(task => {
+      console.log(task);
+    })
   }
 
   onUserChangedClient (newClient:number) {

@@ -64,6 +64,9 @@ export class HomeComponent implements OnInit {
 
     switch (this.selectedTab) {
       case 'all':
+        // params.assignedToModeratorId = 'moderator';
+        break;
+      case 'assigned_me':
         params.assignedToModeratorId = 'moderator';
         break;
       case 'pending':

@@ -78,6 +78,30 @@ export class LanguageTasksEffects {
     // )
   // );
 
+  // startLanguageTask$ = createEffect(() => 
+  //   this.actions$.pipe(
+  //     ofType(LanguageTasksActions.requestLanguageTaskStart),
+  //     exhaustMap(action =>
+  //       this.apiService.updateItemCheckout(action.params.queueId, action.params.contentId, action.params.body).pipe(
+  //         map(response => LanguageTasksActions.successLanguageTaskStart({ resp: response })),
+  //         catchError(error => of(LanguageTasksActions.failedLanguageTaskStart({ resp: error })))
+  //       )
+  //     )
+  //   )
+  // );
+
+  // stopLanguageTask$ = createEffect(() =>
+  //   this.actions$.pipe(
+  //     ofType(LanguageTasksActions.requestLanguageTaskStop),
+  //     exhaustMap(action =>
+  //       this.apiService.deleteItemCheckout(action.params.queueId, action.params.contentId).pipe(
+  //         map(response => LanguageTasksActions.successLanguageTaskStop({ resp: response })),
+  //         catchError(error => of(LanguageTasksActions.failedLanguageTaskStop({ resp: error })))
+  //       )
+  //     )
+  //   )
+  // );
+
   constructor(
     private actions$: Actions,
     private apiService: DefaultService

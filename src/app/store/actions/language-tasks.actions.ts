@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { TaskOutput, TaskInput, InlineResponse201, ModeratorId } from 'src/app/api';
+import { TaskOutput, TaskInput, InlineResponse201, ModeratorId, Checkout, InlineResponse2001 } from 'src/app/api';
 
 export interface LanguageTasksRequestInterface {
     language: string,
@@ -25,6 +25,15 @@ export interface LanguageTaskAddRequestInterface {
     body?: Array<TaskInput>,
     updateData?: boolean,
     extraHttpRequestParams?: any
+}
+export interface LanguageTaskStartRequestInterface {
+    queueId: string,
+    contentId: string,
+    body?: Checkout
+}
+export interface LanguageTaskStopRequestInterface {
+    queueId: string,
+    contentId: string
 }
 
 export const requestLanguageTasks = createAction(
@@ -75,3 +84,27 @@ export const failedLanguageTaskCreate = createAction(
     '[Language Task Create Page] Failed Task Create',
     props<{resp: InlineResponse201}>()
 );
+// export const requestLanguageTaskStart = createAction(
+//     '[Language Task Detail Page] Request Task Start',
+//     props<{params: LanguageTaskStartRequestInterface}>()
+// );
+// export const successLanguageTaskStart = createAction(
+//     '[Language Task Detail Page] Success Task Start',
+//     props<{resp: InlineResponse2001}>()
+// );
+// export const failedLanguageTaskStart = createAction(
+//     '[Language Task Detail Page] Failed Task Start',
+//     props<{resp: InlineResponse2001}>()
+// );
+// export const requestLanguageTaskStop = createAction(
+//     '[Language Task Detail Page] Request Task Stop',
+//     props<{params: LanguageTaskStopRequestInterface}>()
+// );
+// export const successLanguageTaskStop = createAction(
+//     '[Language Task Detail Page] Success Task Stop',
+//     props<{resp: InlineResponse2001}>()
+// );
+// export const failedLanguageTaskStop = createAction(
+//     '[Language Task Detail Page] Failed Task Stop',
+//     props<{resp: InlineResponse2001}>()
+// );

@@ -53,7 +53,7 @@
                     <app-select [items]="accountOptions" (doSelect)="changeAccount($event)" [(ngModel)]="taskFormData.data.account"></app-select>
                 </div>
             </div>
-            <div class="section"> 
+            <div class="section" *ngIf="comments.length"> 
                 <p class="section-name">Comments</p>
                 <div class="comment-wrapper" *ngFor="let comment of comments"> 
                     <app-comment [queueId]="'task'" [contentId]="task && task.queueItem.contentId" [comment]="comment"></app-comment>
@@ -64,10 +64,10 @@
             <button class="button no-border accent" *ngIf="pageType !== 0" (click)="onSave()">
                 <span class="btn-label">Save</span>
             </button>
-            <button class="button no-border light">
+            <button class="button no-border light" *ngIf="pageType != 2" (click)="onStart()">
                 <span class="btn-label">Start</span>
             </button>
-            <button class="button no-border light">
+            <button class="button no-border light" *ngIf="pageType != 2" (click)="onStop()">
                 <span class="btn-label">Stop</span>
             </button>
             <button class="button no-border dark" [routerLink]="['/filter-quality/language-tasks']">
