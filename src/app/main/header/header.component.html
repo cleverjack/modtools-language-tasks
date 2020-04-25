@@ -3,7 +3,9 @@
   <main-logo></main-logo>
   
   <main-search></main-search>
-  
+  <!-- Current Task -->
+  <a class="current-task" *ngIf="task" [routerLink]="['/filter-quality/language-tasks', task.queueItem.contentId]">{{task.queueItem.contentId}}</a>
+
   <client-picker [selectedClient]="this.UserService.preferences.lastClientId"
                  (clientChanged)="onUserChangedClient($event)"
   ></client-picker>

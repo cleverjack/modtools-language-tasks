@@ -118,7 +118,7 @@ export class DetailsComponent implements OnInit {
         .subscribe((languageTasks: TaskOutput) => {
           const tasks = languageTasks ? languageTasks.items : [];
           if (tasks.length > 0) {
-            this.task = tasks[0];
+            this.task = tasks.find(item => item.queueItem.contentId == taskId);//tasks[0];
             this.dueDate = moment(this.task.data.dueDate);
             this.getComments(this.task.queueItem.contentId);
           }
