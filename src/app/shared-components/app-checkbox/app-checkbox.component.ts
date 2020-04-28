@@ -41,6 +41,7 @@ export class AppCheckboxComponent implements ControlValueAccessor, OnInit {
 
   writeValue(value: any) {
     this._value = value;
+    console.log(this._value);
   }
 
   registerOnChange(fn: any): void {

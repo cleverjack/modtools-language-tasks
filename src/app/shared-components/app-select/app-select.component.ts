@@ -6,6 +6,7 @@ export interface SelectType {
     id: string;
     label: string;
     isSelected?: boolean;
+    selected?: boolean;
 }
 
 @Component({
@@ -28,11 +29,7 @@ export class AppSelectComponent implements ControlValueAccessor, OnInit{
     @Input() multiselect = false;
     @Output() doSelect = new EventEmitter<SelectType>();
 
-    public _selectedItem: SelectType = {
-        id: '',
-        label: ''
-    };
-
+    public _selectedItem: any;//SelectType | Array<SelectType>;
     public isOpenList = false;
     isDisabled = false;
     isSelected = false;
@@ -43,32 +40,49 @@ export class AppSelectComponent implements ControlValueAccessor, OnInit{
     constructor() { }
 
     ngOnInit() {
-        if (!this.selectedItem) {
-            if (this.items.length > 0) {
-                this._selectedItem = this.items[0];
-            } else {
-                this._selectedItem = {
-                    id: '',
-                    label: ''
-                };
-            }
-        } else {
-            this._selectedItem = this.selectedItem;
-        }
-        console.log(this._selectedItem);
+        // if (!this.selectedItem) {
+        //     if (this.items.length > 0) {
+        //         this._selectedItem = this.items[0];
+        //     } else {
+        //         this._selectedItem = {
+        //             id: '',
+        //             label: ''
+        //         };
+        //     }
+        // } else {
+        //     this._selectedItem = this.selectedItem;
+        // }
+        // console.log(this._selectedItem);
     }
 
     writeValue(obj: any): void {
-        if (obj) {
-            this._selectedItem = obj;
-        } else {
-            if (this.items.length > 0) {
-                this._selectedItem = this.items[0];
+        if (this.multiselect) {
+            if (obj && obj.length > 0) {
+                obj.map(item => item.selected = true);
+                this._selectedItem = obj;
             } else {
-                this._selectedItem = {
-                    id: '',
-                    label: ''
-                };
+                if (this.items.length > 0) {
+                    this.items[0].selected = true;
+                    this._selectedItem = [this.items[0]];
+                } else {
+                    this._selectedItem = [{
+                        id: '',
+                        label: ''
+                    }];
+                }
+            }
+        } else {
+            if (obj) {
+                this._selectedItem = obj;
+            } else {
+                if (this.items.length > 0) {
+                    this._selectedItem = this.items[0];
+                } else {
+                    this._selectedItem = {
+                        id: '',
+                        label: ''
+                    };
+                }
             }
         }
     }
@@ -83,12 +97,26 @@ export class AppSelectComponent implements ControlValueAccessor, OnInit{
     }
 
     onClick(item) {
-        this._selectedItem = item;
-        this.propagateChange(this._selectedItem);
-
         if (!this.multiselect) {
             this.isOpenList = false;
+            this._selectedItem = item;
+            this.propagateChange(this._selectedItem);
             this.doSelect.emit(item);
+        } else {
+            let tempSelectedItem = this._selectedItem as Array<SelectType>;
+            let index = tempSelectedItem.indexOf(item);
+            if (index > -1) {
+                tempSelectedItem.splice(index, 1);
+                this._selectedItem = tempSelectedItem;
+                item.selected = false;
+            } else {
+                tempSelectedItem.push(item);
+                this._selectedItem = tempSelectedItem;
+                item.selected = true;
+            }
+            console.log(this._selectedItem);
+            this.propagateChange(this._selectedItem);
+            this.doSelect.emit(this._selectedItem);
         }
     }
 }

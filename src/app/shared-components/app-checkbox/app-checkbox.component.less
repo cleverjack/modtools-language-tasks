@@ -53,7 +53,7 @@
   }
 
   /* On mouse-over, add a grey background color */
-  &:hover input ~ .checkmark {
+  &:hover .checkmark {
     background-color: var(--page-bg);
   }
 
@@ -65,7 +65,7 @@
   }
 
   /* Show the checkmark when checked */
-  input:checked ~ .checkmark:after {
+  .checked.checkmark:after {
     display: block;
   }
 

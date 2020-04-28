@@ -23,6 +23,7 @@
         right: 5px;
         color: var(--app-select-fg);
     }
+
     .label-text {
         display: flex;
         align-items: center;
@@ -30,12 +31,28 @@
         color: var(--app-select-fg);
         text-transform: capitalize;
     }
+    
+    &.multi {
+        .selected-items {
+            display: flex;
+            box-sizing: border-box;
+            width: 100%;
+            overflow: hidden;
+        }
+        .label-text {
+            padding: 2px 4px;
+            border-radius: 2px;
+            border: 1px solid;
+            margin-right: 4px;
+            white-space: nowrap;
+        }
+    }
     .item-list {
         position: absolute;
         min-width: 120px;
         width: 100%;
         list-style: none;
-        top: 24px;
+        top: 30px;
         padding: 10px 0px;
         border-radius: 4px;
         right: 0px;

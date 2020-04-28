@@ -68,7 +68,8 @@ export class DetailsComponent implements OnInit {
   task: TaskOutputItems;
   comments: Array<Comment> = [];
   dueDate: moment.Moment;
-  taskFormData: TaskInput; // formdata when create or edit task
+  taskFormData: TaskInput | any; // formdata when edit or create task
+  // createFormData: any; // formdata when create task
   pageType = 0; // enum: 0 - details page, 1 - edit page, 2 - create page
   accountOptions: Array<any> = [
     {
@@ -90,8 +91,12 @@ export class DetailsComponent implements OnInit {
   ];
   assignOptions: Array<any> = [
     {
-      id: 'Jhon Smith',
+      id: 'jhon_smith',
       label: 'Jhon Smith'
+    },
+    {
+      id: 'danil_j',
+      label: 'Danil J'
     }
   ];
 
@@ -128,8 +133,8 @@ export class DetailsComponent implements OnInit {
     } else {
       this.pageType = 2;
       this.taskFormData = {
-        clientId: null,
-        language: 'en',
+        clientId: [],
+        language: ['en'],
         priority: 0,
         data: {
           task: '',
@@ -174,7 +179,7 @@ export class DetailsComponent implements OnInit {
   }
 
   onLanguageChange(lang): void {
-    console.log(lang);
+    console.log(this.taskFormData.language);
   }
 
   changeAssign(item): void {
@@ -191,19 +196,27 @@ export class DetailsComponent implements OnInit {
       // this.router.navigate(['/filter-quality/language-tasks']);
     }
     if (this.pageType === 2) {
-      const formData: TaskInput = {
-        clientId: this.taskFormData.clientId,
-        language: this.taskFormData.language,
-        priority: this.taskFormData.priority,
-        data: {
-          task: this.taskFormData.data.task,
-          instructions: this.taskFormData.data.instructions,
-          dueDate: moment(this.taskFormData.data.dueDate, 'MM-DD-YYYY').valueOf(),
-          additionalProp1: {}
-        }
-      };
+      let reqBody = [];
 
-      this.apiService.addTaskItems([formData]).subscribe(resp => {
+      this.taskFormData.clientId.map(client => {
+        this.taskFormData.language.map(lang => {
+          const formData: TaskInput = {
+            clientId: client.id,
+            language: lang,
+            priority: this.taskFormData.priority,
+            data: {
+              task: this.taskFormData.data.task,
+              instructions: this.taskFormData.data.instructions,
+              dueDate: moment(this.taskFormData.data.dueDate, 'MM-DD-YYYY').valueOf(),
+              additionalProp1: {}
+            }
+          };
+
+          reqBody.push(formData);
+        })
+      })
+
+      this.apiService.addTaskItems(reqBody).subscribe(resp => {
         if (resp.success) {
           this.router.navigate(['/filter-quality/language-tasks']);
         }
