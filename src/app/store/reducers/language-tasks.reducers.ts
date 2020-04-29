@@ -32,9 +32,9 @@ export function reducer(state: State | undefined, action: Action) {
 export const getLanguageTasksData = (state: IAppState) => state.languageTasksData;
 
 export const _getLanguageTasks = createSelector(getLanguageTasksData, (languageTasksData) => {
-  return languageTasksData.languageTasks;
+  return languageTasksData ? languageTasksData.languageTasks : [];
 });
 
 export const _getLanguageTaskDetails = createSelector(getLanguageTasksData, (languageTasksData) => {
-  return languageTasksData.languageTaskDetails;
+  return languageTasksData ? languageTasksData.languageTasks : [];
 });

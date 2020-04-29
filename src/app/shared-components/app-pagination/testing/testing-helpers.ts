@@ -37,7 +37,7 @@ export function getControlsDirective(fixture: ComponentFixture<ComponentTestComp
  * If includeAll is set to true, the boundary links will also be included.
  */
 export function getPageLinkItems(fixture: ComponentFixture<any>,
-                                 selector: string = 'pagination-controls li',
+                                 selector: string = 'app-pagination-controls li',
                                  includeAll: boolean = false): string[] {
     const all = fixture.debugElement.queryAll(By.css(selector))
         .filter(el => (el.nativeElement as HTMLLIElement).classList.contains('small-screen') === false)
@@ -72,14 +72,14 @@ export function overrideTemplate<T>(component: Type<T>, templateString: string):
     <ul>
         <li *ngFor="let item of collection | paginate: config" class="list-item">{{ item }}</li>
     </ul>
-    <pagination-controls [id]="config.id"
+    <app-pagination-controls [id]="config.id"
                          (pageChange)="pageChanged($event)"
                          (pageBoundsCorrection)="pageChangedBoundsCorrection($event)"
                          [maxSize]="maxSize"
                          [directionLinks]="directionLinks"
                          [autoHide]="autoHide"
                          [responsive]="responsive">
-    </pagination-controls>`
+    </app-pagination-controls>`
 })
 export class ComponentTestComponent {
     maxSize = 9;

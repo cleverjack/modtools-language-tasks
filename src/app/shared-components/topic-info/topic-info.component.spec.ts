@@ -18,6 +18,13 @@ describe('TopicInfoComponent', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(TopicInfoComponent);
         component = fixture.componentInstance;
+        const topic: any = {
+            color: 'red',
+            icon: 'comments',
+            name: 'test',
+            value: 'test'
+        }
+        component.topic = topic;
         fixture.detectChanges();
     });
 

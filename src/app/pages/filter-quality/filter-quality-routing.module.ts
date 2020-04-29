@@ -9,12 +9,12 @@ const routes: Routes = [
     pathMatch: 'full',
     redirectTo: 'language-tasks'
   },
-  {
-    path: 'audit-rules',
-    component: FilterQualityComponent,
-    data: {breadcrumb: 'Audit Rules', title: 'Audit Rules'},
-    loadChildren: () => import('./audit-rules/audit-rules.module').then(m => m.AuditRulesModule)
-  },
+  // {
+  //   path: 'audit-rules',
+  //   component: FilterQualityComponent,
+  //   data: {breadcrumb: 'Audit Rules', title: 'Audit Rules'},
+  //   loadChildren: () => import('./audit-rules/audit-rules.module').then(m => m.AuditRulesModule)
+  // },
   {
     path: 'language-tasks',
     component: FilterQualityComponent,

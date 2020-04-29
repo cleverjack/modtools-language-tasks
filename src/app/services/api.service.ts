@@ -21,8 +21,6 @@ export class ApiService {
 
   constructor(
     private http: HttpClient,
-    private router: Router,
-    private route: ActivatedRoute,
     private constantsService: ConstantsService
   ) {
     this.topicTypes = this.constantsService.topicTypes;

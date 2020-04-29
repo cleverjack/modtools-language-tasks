@@ -39,21 +39,7 @@ export class AppSelectComponent implements ControlValueAccessor, OnInit{
 
     constructor() { }
 
-    ngOnInit() {
-        // if (!this.selectedItem) {
-        //     if (this.items.length > 0) {
-        //         this._selectedItem = this.items[0];
-        //     } else {
-        //         this._selectedItem = {
-        //             id: '',
-        //             label: ''
-        //         };
-        //     }
-        // } else {
-        //     this._selectedItem = this.selectedItem;
-        // }
-        // console.log(this._selectedItem);
-    }
+    ngOnInit() { }
 
     writeValue(obj: any): void {
         if (this.multiselect) {

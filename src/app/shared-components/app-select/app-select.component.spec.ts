@@ -18,6 +18,14 @@ describe('AppSelectComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(AppSelectComponent);
     component = fixture.componentInstance;
+    const _selectedItem: any = {
+      id: 'test',
+      label: 'test'
+    };
+    const multiple: boolean = false;
+
+    component.multiselect = multiple;
+    component._selectedItem = _selectedItem;
     fixture.detectChanges();
   });
 
