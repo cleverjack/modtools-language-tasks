@@ -133,7 +133,10 @@ export class DetailsComponent implements OnInit {
     } else {
       this.pageType = 2;
       this.taskFormData = {
-        clientId: [],
+        clientId: [{
+          id: 'All',
+          label: 'All'
+        }],
         language: ['en'],
         priority: 0,
         data: {
@@ -160,10 +163,11 @@ export class DetailsComponent implements OnInit {
       case 0:
       case 1:
         this.taskFormData = {
-          clientId: null,
+          clientId: this.accountOptions[0],
           language: 'en',
           priority: 0,
           data: {
+            assign: this.assignOptions[0],
             task: this.task ? this.task.data.task : '',
             instructions: this.task ? this.task.data.instructions : '',
             dueDate: this.task ? moment(this.task.data.dueDate) : moment()
@@ -192,8 +196,24 @@ export class DetailsComponent implements OnInit {
 
   onSave(): void {
     if (this.pageType === 1) {
-      this.pageType = 0;
-      // this.router.navigate(['/filter-quality/language-tasks']);
+      const formData: TaskInput = {
+        clientId: this.taskFormData.clientId.id,
+        language: this.taskFormData.language,
+        priority: this.taskFormData.priority,
+        data: {
+          assign: this.taskFormData.data.assign,
+          task: this.taskFormData.data.task,
+          instructions: this.taskFormData.data.instructions,
+          dueDate: moment(this.taskFormData.data.dueDate, 'MM-DD-YYYY').valueOf(),
+          additionalProp1: {}
+        }
+      };
+      
+      this.apiService.addTaskItems([formData], true).subscribe(resp => {
+        if (resp.success) {
+          this.pageType = 0;
+        }
+      });
     }
     if (this.pageType === 2) {
       let reqBody = [];
