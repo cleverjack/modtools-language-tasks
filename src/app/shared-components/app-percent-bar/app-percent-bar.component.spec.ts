@@ -18,6 +18,8 @@ describe('AppPercentBarComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(AppPercentBarComponent);
     component = fixture.componentInstance;
+    let percent = 50;
+    component.percent = percent;
     fixture.detectChanges();
   });
 

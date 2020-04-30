@@ -26,10 +26,32 @@ describe('AppSelectComponent', () => {
 
     component.multiselect = multiple;
     component._selectedItem = _selectedItem;
+    component.items = [{
+      id: 'test1',
+      label: 'test1',
+      selected: false
+    }, {
+      id: 'test2',
+      label: 'test2',
+      selected: false
+    }, {
+      id: 'test3',
+      label: 'test3',
+      selected: false
+    }, {
+      id: 'test4',
+      label: 'test4',
+      selected: false
+    }];
     fixture.detectChanges();
   });
 
   it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+
+  it('should create multiple select box', () => {
+    component.multiselect = true;
     expect(component).toBeTruthy();
   });
 });
