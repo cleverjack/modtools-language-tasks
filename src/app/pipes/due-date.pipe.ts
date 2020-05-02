@@ -42,7 +42,7 @@ export class DueDatePipe implements PipeTransform {
       }
     }
 
-    return moment().unix();
+    return 'Invalid';
   }
 
 }

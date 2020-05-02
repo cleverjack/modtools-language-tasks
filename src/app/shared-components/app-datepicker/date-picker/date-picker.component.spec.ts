@@ -13,6 +13,9 @@ import {DayCalendarService} from '../day-calendar/day-calendar.service';
 import {TimeSelectService} from '../time-select/time-select.service';
 import {UtilsService} from '../common/services/utils/utils.service';
 import {By} from '@angular/platform-browser';
+import * as moment from 'moment';
+import { IDate } from '../common/models/date.model';
+import { SelectEvent } from '../common/types/selection-event.enum';
 
 describe('Component: DatePickerComponent', () => {
   let component: DatePickerComponent;
@@ -88,5 +91,115 @@ describe('Component: DatePickerComponent', () => {
     inputElement.triggerEventHandler('blur', {});
 
     expect(component.onTouchedCallback).toHaveBeenCalledWith();
+  });
+
+  it('should get openOnFocus property', () => {
+    expect(component.openOnFocus).toEqual(true);
+  });
+
+  it('should set openOnClick property', () => {
+    expect(component.openOnClick).toEqual(true);
+  });
+
+  it('should test set areCalendarsShown as true', () => {
+    component.areCalendarsShown = true;
+
+    expect(component._areCalendarsShown).toEqual(true);
+  });
+
+  it('should test set areCalendarsShown as false', () => {
+    component.areCalendarsShown = false;
+
+    expect(component._areCalendarsShown).toEqual(false);
+  });
+  
+  it('should test set selected as false', () => {
+    component.selected = [moment("1-1-2009", "DD-MM-YYYY")];
+
+    expect(component.selected).toEqual([moment("1-1-2009", "DD-MM-YYYY")]);
+  });
+
+  it('should test onBodyClick function', () => {
+    component.componentConfig = {
+      hideOnOutsideClick: true,
+    };
+    component.onBodyClick();
+    fixture.detectChanges();
+
+    expect(component.hideStateHelper).toEqual(false);
+  });
+   
+  it('should test onBodyClick function handle calender', () => {
+    component.componentConfig = {
+      hideOnOutsideClick: true,
+    };
+    component.areCalendarsShown = true;
+
+    component.onBodyClick();
+    fixture.detectChanges();
+
+    expect(component.hideStateHelper).toEqual(false);
+  });
+   
+  it('should test onClick event', () => {
+    component.componentConfig = {
+      openOnClick: true,
+    };
+
+    fixture.debugElement.triggerEventHandler('click', {});
+    
+    expect(component.hideStateHelper).toEqual(true);
+  });
+ 
+  it('should test onClick event when openOnClick false', () => {
+    component.componentConfig = {
+      openOnClick: false,
+    };
+
+    const res = fixture.debugElement.triggerEventHandler('click', {});
+    
+    expect(res).toEqual(undefined);
+  });
+
+  it('should test setDisabledState function', () => {
+    component.setDisabledState(true);
+    
+    expect(component.disabled).toEqual(true);
+  });
+
+  it('should test inputFocused function', () => {
+    component.componentConfig = {
+      openOnFocus: true,
+    };
+    component.inputFocused();
+    fixture.detectChanges();
+    expect(component.isFocusedTrigger).toEqual(true);
+  });
+
+  
+  it('should test inputFocused function return null', () => {
+    component.componentConfig = {
+      openOnClick: false,
+    };
+    let res = component.inputFocused();
+
+    expect(res).toEqual(undefined);
+  });
+
+  it('should test onViewDateChange function', () => {
+    component.onViewDateChange(moment("1-1-2009", "DD-MM-YYYY"));
+
+    expect(component.selected).toBeDefined();
+  });
+
+  it('should test dateSelected function', () => {
+    const date: IDate = {
+      date: moment(),
+      selected: false
+    };
+    const type: SelectEvent = SelectEvent.INPUT;
+
+    component.dateSelected(date, "year", type, false);
+    expect(component.selected).toBeDefined();
   });
 });

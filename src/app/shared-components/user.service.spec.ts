@@ -3,6 +3,8 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { HttpClient } from '@angular/common/http';
 
 import { UserService } from './user.service';
+import { UserPreferences } from './user';
+import { DefaultLanguage, DefaultClient } from 'src/constants';
 
 describe('UserService', () => {
   
@@ -22,5 +24,25 @@ describe('UserService', () => {
 
   it('should be created', () => {
     expect(service).toBeTruthy();
+  });
+
+  it('get prefs', () => {
+    let defaultPrefs: UserPreferences = {
+      language: DefaultLanguage,
+      lastClientId: DefaultClient
+    };
+
+    service.prefs = defaultPrefs;
+    expect(service.preferences).toBeTruthy();
+  });
+
+  it('get prefs', () => {
+    let defaultPrefs: UserPreferences = {
+      language: DefaultLanguage,
+      lastClientId: DefaultClient
+    };
+
+    service.preferences = defaultPrefs;
+    expect(service.preferences).toBeTruthy();
   });
 });

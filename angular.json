@@ -110,7 +110,8 @@
             "styles": [
               "src/styles.less"
             ],
-            "scripts": []
+            "scripts": [],
+            "codeCoverageExclude": ["src/app/shared-components/app-datepicker/common/services/**", "src/app/api/**", "src/app/store/**"]
           }
         },
         "lint": {

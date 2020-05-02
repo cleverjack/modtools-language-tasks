@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {CommonModule} from '@angular/common';
 import {DatePickerComponent} from './date-picker/date-picker.component';
-import {DatePickerDirective} from './date-picker/date-picker.directive';
+// import {DatePickerDirective} from './date-picker/date-picker.directive';
 import {DayCalendarComponent} from './day-calendar/day-calendar.component';
 import {MonthCalendarComponent} from './month-calendar/month-calendar.component';
 import {TimeSelectComponent} from './time-select/time-select.component';
@@ -10,7 +10,7 @@ import {CalendarNavComponent} from './calendar-nav/calendar-nav.component';
 import {DayTimeCalendarComponent} from './day-time-calendar/day-time-calendar.component';
 
 export {DatePickerComponent} from './date-picker/date-picker.component';
-export {DatePickerDirective} from './date-picker/date-picker.directive';
+// export {DatePickerDirective} from './date-picker/date-picker.directive';
 export {DayCalendarComponent} from './day-calendar/day-calendar.component';
 export {DayTimeCalendarComponent} from './day-time-calendar/day-time-calendar.component';
 export {TimeSelectComponent} from './time-select/time-select.component';
@@ -19,7 +19,7 @@ export {MonthCalendarComponent} from './month-calendar/month-calendar.component'
 @NgModule({
   declarations: [
     DatePickerComponent,
-    DatePickerDirective,
+    // DatePickerDirective,
     DayCalendarComponent,
     MonthCalendarComponent,
     CalendarNavComponent,
@@ -35,7 +35,7 @@ export {MonthCalendarComponent} from './month-calendar/month-calendar.component'
   ],
   exports: [
     DatePickerComponent,
-    DatePickerDirective,
+    // DatePickerDirective,
     MonthCalendarComponent,
     DayCalendarComponent,
     TimeSelectComponent,
