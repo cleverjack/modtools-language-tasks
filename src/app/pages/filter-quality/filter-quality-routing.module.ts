@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { FilterQualityComponent } from './filter-quality.component';
+import { LanguageTasksComponent } from './language-tasks/language-tasks.component';
 
 const routes: Routes = [
   {
@@ -17,13 +18,13 @@ const routes: Routes = [
   // },
   {
     path: 'language-tasks',
-    component: FilterQualityComponent,
+    component: LanguageTasksComponent,
     data: {breadcrumb: 'Language Tasks', title: 'Language Tasks'},
     loadChildren: () => import('./language-tasks/language-tasks.module').then(m => m.LanguageTasksModule)
   },
   {
     path: 'create-rule',
-    component: FilterQualityComponent,
+    component: LanguageTasksComponent,
     data: {breadcrumb: 'Create Rule', title: 'Create Rule'},
     loadChildren: () => import('./create-rule/create-rule.module').then(m => m.CreateRuleModule)
   }
